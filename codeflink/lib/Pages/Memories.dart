@@ -1,56 +1,120 @@
+import 'package:codeflink/Pages/MemoryContainer.dart';
 import 'package:flutter/material.dart';
 
-import 'MemoryContainer.dart';
+void main() {
+  runApp(MemoriesApp());
+}
+
+class MemoriesApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Memories App',
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+      ),
+      home: Memories(),
+    );
+  }
+}
 
 class Memories extends StatefulWidget {
   const Memories({Key? key}) : super(key: key);
+
   @override
   State<Memories> createState() => _MemoriesState();
 }
 
 class _MemoriesState extends State<Memories> {
+  bool _isSearching = false;
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Memories'),
-          backgroundColor: Colors.purpleAccent,
+    return Scaffold(
+      appBar: AppBar(
+        title: _isSearching ? _buildSearchField() : Text('Memories'),
+        backgroundColor: Colors.purpleAccent,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            if (_isSearching) {
+              setState(() {
+                _isSearching = false;
+              });
+            } else {
+              Navigator.of(context).pop();
+            }
+          },
         ),
-        body: ListView(
-          children: [
-            MemoryContainer(
-              username: 'Meenakshi Temple',
-              text: 'One Of the Best Temple.',
-              time: '10:30 AM',
-              iconData: Icons.temple_hindu_outlined,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          MemoryContainer1()), // Replace NextPage() with the page you want to navigate to
-                );
-              },
-            ),
-            MemoryContainer(
-              username: 'Vishald mall',
-              text: 'One OF the Best Mall in Madurai.',
-              time: '12:00 PM',
-              iconData: Icons.location_city_sharp,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          MemoryContainer1()), // Replace NextPage() with the page you want to navigate to
-                );
-              },
-            ),
-            // Add more MemoryContainer widgets as needed
-          ],
-        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                _isSearching = !_isSearching;
+              });
+            },
+            icon: _isSearching ? Icon(Icons.close) : Icon(Icons.search),
+          ),
+        ],
       ),
+      body: _isSearching ? _buildSearchResults() : _buildMemoriesList(),
+    );
+  }
+
+  Widget _buildSearchField() {
+    return TextField(
+      autofocus: true,
+      decoration: InputDecoration(
+        hintText: 'Search...',
+        hintStyle: TextStyle(color: Colors.white70),
+      ),
+      style: TextStyle(color: Colors.white),
+      onChanged: (query) {
+        // Handle search query changes
+      },
+    );
+  }
+
+  Widget _buildSearchResults() {
+    // Replace this with your search results widget
+    return Center(
+      child: Text('Search Results'),
+    );
+  }
+
+  Widget _buildMemoriesList() {
+    return ListView(
+      children: [
+        MemoryContainer(
+          username: 'Meenakshi Temple',
+          text: 'One Of the Best Temple.',
+          time: '10:30 AM',
+          iconData: Icons.temple_hindu_outlined,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MemoryContainer1(),
+              ),
+            );
+          },
+        ),
+        MemoryContainer(
+          username: 'Vishald mall',
+          text: 'One OF the Best Mall in Madurai.',
+          time: '12:00 PM',
+          iconData: Icons.location_city_sharp,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MemoryContainer1(),
+              ),
+            );
+          },
+        ),
+        // Add more MemoryContainer widgets as needed
+      ],
     );
   }
 }
@@ -131,3 +195,19 @@ class MemoryContainer extends StatelessWidget {
     );
   }
 }
+
+// class MemoryContainer1 extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Memory Details'),
+//       ),
+//       body: Container(
+//         child: Center(
+//           child: Text('Memory Container 1'),
+//         ),
+//       ),
+//     );
+//   }
+// }

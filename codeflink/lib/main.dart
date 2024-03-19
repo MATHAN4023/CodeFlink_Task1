@@ -1,4 +1,4 @@
-import 'package:codeflink/Pages/HomePage.dart';
+import 'package:codeflink/Pages/LoginPage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,6 +15,7 @@ class CodeFlink extends StatefulWidget {
 class _CodeFlinkState extends State<CodeFlink> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: HomePage());
+    return const MaterialApp(
+        debugShowCheckedModeBanner: false, home: LoginPage());
   }
 }

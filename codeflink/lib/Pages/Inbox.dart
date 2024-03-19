@@ -1,3 +1,4 @@
+import 'package:codeflink/Pages/HomePage.dart';
 import 'package:flutter/material.dart';
 
 import 'Memories.dart';
@@ -69,41 +70,65 @@ class _InboxState extends State<Inbox> {
       appBar: AppBar(
         title: Text("List Page"),
         backgroundColor: Colors.purpleAccent,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const HomePage()),
+            );
+          },
+        ),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          TextFormField(
-            readOnly: true,
-            onTap: () => _selectDate(context),
-            decoration: InputDecoration(
-              labelText: 'Select Date',
-              prefixIcon: Icon(Icons.calendar_today),
-            ),
-            controller: TextEditingController(
-              text: selectedDate != null
-                  ? "${selectedDate!.year}-${selectedDate!.month}-${selectedDate!.day}"
-                  : '',
+          SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: TextFormField(
+              readOnly: true,
+              onTap: () => _selectDate(context),
+              decoration: InputDecoration(
+                labelText: 'Select Date',
+                prefixIcon: Icon(Icons.calendar_today),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+              ),
+              controller: TextEditingController(
+                text: selectedDate != null
+                    ? "${selectedDate!.year}-${selectedDate!.month}-${selectedDate!.day}"
+                    : '',
+              ),
             ),
           ),
           SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: proceedEnabled
-                ? () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Memories()),
-                    );
-                  }
-                : null,
-            child: Text('Proceed'),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: ElevatedButton(
+              onPressed: proceedEnabled
+                  ? () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Memories()),
+                      );
+                    }
+                  : null,
+              child: Text('Proceed'),
+            ),
           ),
           SizedBox(height: 20),
           Expanded(
             child: ListView.builder(
               itemCount: filteredItems.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(filteredItems[index]),
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: ListTile(
+                    title: Text(filteredItems[index]),
+                  ),
                 );
               },
             ),
