@@ -2,6 +2,7 @@ import 'package:codeflink/Pages/HomePage.dart';
 import 'package:flutter/material.dart';
 
 import 'Memories.dart';
+import 'MemoryContainer.dart';
 
 class Inbox extends StatefulWidget {
   const Inbox({Key? key}) : super(key: key);
@@ -12,55 +13,7 @@ class Inbox extends StatefulWidget {
 
 class _InboxState extends State<Inbox> {
   DateTime? selectedDate;
-  List<String> items = [
-    "Item 1 - Date: 2024-03-01",
-    "Item 2 - Date: 2024-03-05",
-    "Item 3 - Date: 2024-03-10",
-    // Add more items here
-  ];
-
-  List<String> filteredItems = [];
-
-  @override
-  void initState() {
-    super.initState();
-    filteredItems = items;
-  }
-
-  void filterByDate(DateTime? selectedDate) {
-    List<String> dateFilteredItems = [];
-    if (selectedDate != null) {
-      String formattedDate =
-          "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}";
-      for (String item in items) {
-        if (item.contains(formattedDate)) {
-          dateFilteredItems.add(item);
-        }
-      }
-      setState(() {
-        filteredItems = dateFilteredItems;
-      });
-    } else {
-      setState(() {
-        filteredItems = items;
-      });
-    }
-  }
-
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2022),
-      lastDate: DateTime(2025),
-    );
-    if (picked != null) {
-      setState(() {
-        selectedDate = picked;
-      });
-      filterByDate(picked);
-    }
-  }
+  bool proceedClicked = false; // Flag to track if "Proceed" button clicked
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +28,7 @@ class _InboxState extends State<Inbox> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
+              MaterialPageRoute(builder: (context) => HomePage()),
             );
           },
         ),
@@ -109,32 +62,76 @@ class _InboxState extends State<Inbox> {
             child: ElevatedButton(
               onPressed: proceedEnabled
                   ? () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Memories()),
-                      );
+                      setState(() {
+                        proceedClicked = true; // Set flag to true
+                      });
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => const Memories()),
+                      // );
                     }
                   : null,
               child: Text('Proceed'),
             ),
           ),
           SizedBox(height: 20),
-          Expanded(
-            child: ListView.builder(
-              itemCount: filteredItems.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: ListTile(
-                    title: Text(filteredItems[index]),
-                  ),
-                );
-              },
+          if (proceedClicked) // Show memory list only if "Proceed" clicked
+            Expanded(
+              child: _buildMemoriesList(),
             ),
-          ),
         ],
       ),
     );
+  }
+
+  Widget _buildMemoriesList() {
+    return ListView(
+      children: [
+        MemoryContainer(
+          username: 'Meenakshi Temple',
+          text: 'One Of the Best Temple.',
+          time: '10:30 AM',
+          iconData: Icons.temple_hindu_outlined,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MemoryContainer1(),
+              ),
+            );
+          },
+        ),
+        MemoryContainer(
+          username: 'Vishald mall',
+          text: 'One OF the Best Mall in Madurai.',
+          time: '12:00 PM',
+          iconData: Icons.location_city_sharp,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MemoryContainer1(),
+              ),
+            );
+          },
+        ),
+        // Add more MemoryContainer widgets as needed
+      ],
+    );
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2022),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
   }
 }

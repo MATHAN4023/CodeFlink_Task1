@@ -1,7 +1,12 @@
+// CamAccess.dart
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:codeflink/Pages/EnterDetails.dart';
 import 'package:codeflink/Pages/HomePage.dart';
 import 'package:flutter/material.dart';
+
+import 'FullScreenImageGallery.dart';
 
 class CamAccess extends StatefulWidget {
   const CamAccess({Key? key}) : super(key: key);
@@ -13,6 +18,8 @@ class CamAccess extends StatefulWidget {
 class _CamAccessState extends State<CamAccess> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
+  List<String> _imagePaths = []; // List to hold paths of the taken images
+  int? _deletedIndex; // Index of the deleted image
 
   // States for each FloatingActionButton's elevation
   double addIconElevation = 0.0;
@@ -35,7 +42,19 @@ class _CamAccessState extends State<CamAccess> {
     );
 
     // Ensure that the _controller is initialized before accessing it
-    return _controller.initialize();
+    await _controller.initialize();
+
+    // Handle image deletion when returning from full screen image view
+    _controller.addListener(() {
+      if (!_controller.value.isTakingPicture) {
+        if (_deletedIndex != null) {
+          setState(() {
+            _imagePaths.removeAt(_deletedIndex!);
+            _deletedIndex = null;
+          });
+        }
+      }
+    });
   }
 
   @override
@@ -56,24 +75,80 @@ class _CamAccessState extends State<CamAccess> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => HomePage(),
-              ),
+              MaterialPageRoute(builder: (context) => HomePage()),
             );
           },
         ),
       ),
-      body: FutureBuilder<void>(
-        future: _initializeControllerFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            // If the Future is complete, display the camera preview
-            return CameraPreview(_controller);
-          } else {
-            // Otherwise, display a loading indicator
-            return Center(child: CircularProgressIndicator());
-          }
-        },
+      body: Column(
+        children: [
+          Expanded(
+            flex: 3,
+            child: Stack(
+              children: [
+                FutureBuilder<void>(
+                  future: _initializeControllerFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      // If the Future is complete, display the camera preview
+                      return CameraPreview(_controller);
+                    } else {
+                      // Otherwise, display a loading indicator
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: _imagePaths.length,
+              itemBuilder: (context, index) {
+                return Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () async {
+                          _deletedIndex = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FullScreenImageGallery(
+                                imagePaths: _imagePaths,
+                                initialIndex: index, // Pass initialIndex here
+                              ),
+                            ),
+                          );
+                        },
+                        child: Image.file(
+                          File(_imagePaths[index]),
+                          width: 70,
+                          height: 70,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: IconButton(
+                        icon: Icon(Icons.cancel_outlined),
+                        onPressed: () {
+                          setState(() {
+                            _imagePaths.removeAt(index);
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -103,6 +178,10 @@ class _CamAccessState extends State<CamAccess> {
                 // Take a picture and save it to the gallery
                 await _initializeControllerFuture;
                 final image = await _controller.takePicture();
+                setState(() {
+                  _imagePaths.add(
+                      image.path); // Add path of the taken image to the list
+                });
                 print('Image saved to: ${image.path}');
               } catch (e) {
                 print('Error: $e');
