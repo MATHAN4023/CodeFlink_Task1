@@ -1,136 +1,39 @@
-import 'package:codeflink/Pages/MemoryContainer.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MemoriesApp());
-}
-
-class MemoriesApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Memories App',
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-      ),
-      home: Memories(),
-    );
-  }
-}
-
-class Memories extends StatefulWidget {
-  const Memories({Key? key}) : super(key: key);
-
-  @override
-  State<Memories> createState() => _MemoriesState();
-}
-
-class _MemoriesState extends State<Memories> {
-  bool _isSearching = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: _isSearching ? _buildSearchField() : Text('Memories'),
-        backgroundColor: Colors.purpleAccent,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            if (_isSearching) {
-              setState(() {
-                _isSearching = false;
-              });
-            } else {
-              Navigator.of(context).pop();
-            }
-          },
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              setState(() {
-                _isSearching = !_isSearching;
-              });
-            },
-            icon: _isSearching ? Icon(Icons.close) : Icon(Icons.search),
-          ),
-        ],
-      ),
-      body: _isSearching ? _buildSearchResults() : _buildMemoriesList(),
-    );
-  }
-
-  Widget _buildSearchField() {
-    return TextField(
-      autofocus: true,
-      decoration: InputDecoration(
-        hintText: 'Search...',
-        hintStyle: TextStyle(color: Colors.white70),
-      ),
-      style: TextStyle(color: Colors.white),
-      onChanged: (query) {
-        // Handle search query changes
-      },
-    );
-  }
-
-  Widget _buildSearchResults() {
-    // Replace this with your search results widget
-    return Center(
-      child: Text('Search Results'),
-    );
-  }
-
-  Widget _buildMemoriesList() {
-    return ListView(
-      children: [
-        MemoryContainer(
-          username: 'Meenakshi Temple',
-          text: 'One Of the Best Temple.',
-          time: '10:30 AM',
-          iconData: Icons.temple_hindu_outlined,
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => MemoryContainer1(),
-              ),
-            );
-          },
-        ),
-        MemoryContainer(
-          username: 'Vishald mall',
-          text: 'One OF the Best Mall in Madurai.',
-          time: '12:00 PM',
-          iconData: Icons.location_city_sharp,
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => MemoryContainer1(),
-              ),
-            );
-          },
-        ),
-        // Add more MemoryContainer widgets as needed
-      ],
-    );
-  }
-}
-
-class MemoryContainer extends StatelessWidget {
+class Memory {
+  final String event;
   final String username;
   final String text;
   final String time;
   final IconData iconData;
-  final VoidCallback onTap;
+  final String location; // New field for location
 
-  MemoryContainer({
+  Memory({
+    required this.event,
     required this.username,
     required this.text,
     required this.time,
     required this.iconData,
+    required this.location,
+  });
+}
+
+class MemoryContainer extends StatelessWidget {
+  final String event;
+  final String username;
+  final String text;
+  final String time;
+  final IconData iconData;
+  final String location;
+  final VoidCallback onTap;
+
+  MemoryContainer({
+    required this.event,
+    required this.username,
+    required this.text,
+    required this.time,
+    required this.iconData,
+    required this.location,
     required this.onTap,
   });
 
@@ -138,76 +41,206 @@ class MemoryContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.all(12.0),
-        margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-        decoration: BoxDecoration(
-          color: Colors.grey[200],
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CircleAvatar(
-              backgroundColor: Colors.blue,
-              child: Text(
-                username[0],
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            SizedBox(width: 12.0),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      child: Card(
+        elevation: 3,
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
                 children: [
+                  Icon(
+                    iconData,
+                    color: Colors.blue,
+                  ),
+                  SizedBox(width: 5),
                   Text(
-                    username,
+                    event,
                     style: TextStyle(
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  SizedBox(height: 4.0),
-                  Text(
-                    text,
-                    style: TextStyle(fontSize: 14.0),
-                  ),
-                  SizedBox(height: 8.0),
-                  Text(
-                    time,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12.0,
                     ),
                   ),
                 ],
               ),
-            ),
-            IconButton(
-              onPressed: () {
-                // You can keep this if you want to add functionality to the icon button
-              },
-              icon: Icon(iconData),
-            ),
-          ],
+              SizedBox(height: 10),
+              Text(
+                "Username: $username",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 5),
+              Text(
+                "Description: $text",
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 5),
+              Text(
+                "Location: $location",
+                style: TextStyle(color: Colors.grey),
+              ),
+              SizedBox(height: 5),
+              Text(
+                "Time: $time",
+                style: TextStyle(color: Colors.grey),
+              ),
+              SizedBox(height: 10),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-// class MemoryContainer1 extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Memory Details'),
-//       ),
-//       body: Container(
-//         child: Center(
-//           child: Text('Memory Container 1'),
-//         ),
-//       ),
-//     );
-//   }
-// }
+class MemoryContainer1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Memory Details"),
+        backgroundColor: Colors.purpleAccent,
+      ),
+      body: Center(
+        child: Text("Memory Details Screen"),
+      ),
+    );
+  }
+}
+
+class Inbox extends StatefulWidget {
+  const Inbox({Key? key}) : super(key: key);
+
+  @override
+  State<Inbox> createState() => _InboxState();
+}
+
+class _InboxState extends State<Inbox> {
+  List<Memory> memories = [
+    Memory(
+      event: 'Meenakshi Temple',
+      username: 'Mathan',
+      text: 'One Of the Best Temple.',
+      time: '10:30 AM',
+      iconData: Icons.temple_hindu_outlined,
+      location: 'Madurai',
+    ),
+    Memory(
+      event: 'Vishald mall 1',
+      username: 'Nithesh',
+      text: 'One OF the Best Mall in Madurai.',
+      time: '12:00 PM',
+      iconData: Icons.location_city_sharp,
+      location: 'Madurai',
+    ),
+    Memory(
+      event: 'Vishald mall 2',
+      username: 'Ram',
+      text: 'One OF the Best Mall in Madurai.',
+      time: '12:00 PM',
+      iconData: Icons.location_city_sharp,
+      location: 'Madurai',
+    ),
+    Memory(
+      event: 'Vishald mall 3',
+      username: 'Ritcherd',
+      text: 'One OF the Best Mall in Madurai.',
+      time: '12:00 PM',
+      iconData: Icons.location_city_sharp,
+      location: 'Madurai',
+    ),
+    // Add more Memory objects as needed
+  ];
+
+  List<Memory> filteredMemories = [];
+  TextEditingController searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    filteredMemories = memories;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("List Page"),
+        backgroundColor: Colors.purpleAccent,
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: TextField(
+              controller: searchController,
+              onChanged: (value) {
+                filterMemories(value);
+              },
+              decoration: InputDecoration(
+                labelText: 'Search Memories',
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          Expanded(
+            child: _buildMemoriesList(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMemoriesList() {
+    return ListView.builder(
+      itemCount: filteredMemories.length,
+      itemBuilder: (context, index) {
+        Memory memory = filteredMemories[index];
+        return MemoryContainer(
+          event: memory.event,
+          username: memory.username,
+          text: memory.text,
+          time: memory.time,
+          iconData: memory.iconData,
+          location: memory.location,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MemoryContainer1(),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void filterMemories(String query) {
+    setState(() {
+      if (query.isNotEmpty) {
+        filteredMemories = memories
+            .where((memory) =>
+                memory.username.toLowerCase().contains(query.toLowerCase()))
+            .toList();
+      } else {
+        filteredMemories = memories;
+      }
+    });
+  }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: Inbox(),
+  ));
+}

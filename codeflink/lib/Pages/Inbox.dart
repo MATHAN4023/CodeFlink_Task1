@@ -1,8 +1,102 @@
-import 'package:codeflink/Pages/HomePage.dart';
+import 'package:codeflink/Pages/MemoryContainer.dart';
 import 'package:flutter/material.dart';
 
-import 'Memories.dart';
-import 'MemoryContainer.dart';
+class Memory {
+  final String event;
+  final String username;
+  final String text;
+  final String time;
+  final IconData iconData;
+  final String location; // New field for location
+
+  Memory({
+    required this.event,
+    required this.username,
+    required this.text,
+    required this.time,
+    required this.iconData,
+    required this.location,
+  });
+}
+
+class MemoryContainer extends StatelessWidget {
+  final String event;
+  final String username;
+  final String text;
+  final String time;
+  final IconData iconData;
+  final String location;
+  final VoidCallback onTap;
+
+  MemoryContainer({
+    required this.event,
+    required this.username,
+    required this.text,
+    required this.time,
+    required this.iconData,
+    required this.location,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 3,
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    iconData,
+                    color: Colors.redAccent,
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    event,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              Text(
+                "Username: $username",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                ),
+              ),
+              SizedBox(height: 5),
+              Text(
+                "Description: $text",
+                style: TextStyle(fontSize: 16, color: Colors.black),
+              ),
+              SizedBox(height: 5),
+              Text(
+                "Location: $location",
+                style: TextStyle(color: Colors.grey),
+              ),
+              SizedBox(height: 5),
+              Text(
+                "Time: $time",
+                style: TextStyle(color: Colors.grey),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 class Inbox extends StatefulWidget {
   const Inbox({Key? key}) : super(key: key);
@@ -12,24 +106,61 @@ class Inbox extends StatefulWidget {
 }
 
 class _InboxState extends State<Inbox> {
-  DateTime? selectedDate;
-  bool proceedClicked = false; // Flag to track if "Proceed" button clicked
+  List<Memory> memories = [
+    Memory(
+      event: 'Meenakshi Temple',
+      username: 'Mathan',
+      text: 'One Of the Best Temple.',
+      time: '10:30 AM',
+      iconData: Icons.temple_hindu_outlined,
+      location: 'Madurai',
+    ),
+    Memory(
+      event: 'Vishald mall 1',
+      username: 'Nithesh',
+      text: 'One OF the Best Mall in Madurai.',
+      time: '12:00 PM',
+      iconData: Icons.location_city_sharp,
+      location: 'Madurai',
+    ),
+    Memory(
+      event: 'Vishald mall 2',
+      username: 'Ritcherd',
+      text: 'One OF the Best Mall in Madurai.',
+      time: '12:00 PM',
+      iconData: Icons.location_city_sharp,
+      location: 'Madurai',
+    ),
+    Memory(
+      event: 'Vishald mall 3',
+      username: 'Ram',
+      text: 'One OF the Best Mall in Madurai.',
+      time: '12:00 PM',
+      iconData: Icons.location_city_sharp,
+      location: 'Madurai',
+    ),
+    // Add more Memory objects as needed
+  ];
+
+  List<Memory> filteredMemories = [];
+  TextEditingController searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    filteredMemories = memories;
+  }
 
   @override
   Widget build(BuildContext context) {
-    bool proceedEnabled = selectedDate != null;
-
     return Scaffold(
       appBar: AppBar(
-        title: Text("List Page"),
-        backgroundColor: Colors.purpleAccent,
+        title: Text("Existing Job Card"),
+        backgroundColor: Colors.redAccent,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            );
+            Navigator.pop(context);
           },
         ),
       ),
@@ -39,60 +170,41 @@ class _InboxState extends State<Inbox> {
           SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: TextFormField(
-              readOnly: true,
-              onTap: () => _selectDate(context),
+            child: TextField(
+              controller: searchController,
+              onChanged: (value) {
+                filterMemories(value);
+              },
               decoration: InputDecoration(
-                labelText: 'Select Date',
-                prefixIcon: Icon(Icons.calendar_today),
+                labelText: 'Search Jobs',
+                prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
                 ),
               ),
-              controller: TextEditingController(
-                text: selectedDate != null
-                    ? "${selectedDate!.year}-${selectedDate!.month}-${selectedDate!.day}"
-                    : '',
-              ),
             ),
           ),
           SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: ElevatedButton(
-              onPressed: proceedEnabled
-                  ? () {
-                      setState(() {
-                        proceedClicked = true; // Set flag to true
-                      });
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const Memories()),
-                      // );
-                    }
-                  : null,
-              child: Text('Proceed'),
-            ),
+          Expanded(
+            child: _buildMemoriesList(),
           ),
-          SizedBox(height: 20),
-          if (proceedClicked) // Show memory list only if "Proceed" clicked
-            Expanded(
-              child: _buildMemoriesList(),
-            ),
         ],
       ),
     );
   }
 
   Widget _buildMemoriesList() {
-    return ListView(
-      children: [
-        MemoryContainer(
-          username: 'Meenakshi Temple',
-          text: 'One Of the Best Temple.',
-          time: '10:30 AM',
-          iconData: Icons.temple_hindu_outlined,
+    return ListView.builder(
+      itemCount: filteredMemories.length,
+      itemBuilder: (context, index) {
+        Memory memory = filteredMemories[index];
+        return MemoryContainer(
+          event: memory.event,
+          username: memory.username,
+          text: memory.text,
+          time: memory.time,
+          iconData: memory.iconData,
+          location: memory.location,
           onTap: () {
             Navigator.push(
               context,
@@ -101,37 +213,27 @@ class _InboxState extends State<Inbox> {
               ),
             );
           },
-        ),
-        MemoryContainer(
-          username: 'Vishald mall',
-          text: 'One OF the Best Mall in Madurai.',
-          time: '12:00 PM',
-          iconData: Icons.location_city_sharp,
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => MemoryContainer1(),
-              ),
-            );
-          },
-        ),
-        // Add more MemoryContainer widgets as needed
-      ],
+        );
+      },
     );
   }
 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2022),
-      lastDate: DateTime(2025),
-    );
-    if (picked != null) {
-      setState(() {
-        selectedDate = picked;
-      });
-    }
+  void filterMemories(String query) {
+    setState(() {
+      if (query.isNotEmpty) {
+        filteredMemories = memories
+            .where((memory) =>
+                memory.username.toLowerCase().contains(query.toLowerCase()))
+            .toList();
+      } else {
+        filteredMemories = memories;
+      }
+    });
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: Inbox(),
+  ));
 }
