@@ -1,3 +1,4 @@
+import 'package:codeflink/Pages/PendingJobCard.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart'; // Import geolocator package
 
@@ -107,30 +108,10 @@ class HomePage extends StatelessWidget {
               height: 10,
             ),
             ListTile(
-              title: Text("Existing Job card"),
-              leading: Icon(Icons.card_travel),
-              onTap: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const Inbox()),
-              ),
-            ),
-            Divider(
-              height: 10,
-            ),
-            ListTile(
               title: Text("New Job card"),
               leading: Icon(Icons.add_chart_rounded),
               onTap: () => Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const CamAccess()),
-              ),
-            ),
-            Divider(
-              height: 10,
-            ),
-            ListTile(
-              title: Text("Pending Job Card"),
-              leading: Icon(Icons.pending_actions),
-              onTap: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const Inbox()),
               ),
             ),
             Divider(
@@ -159,6 +140,100 @@ class HomePage extends StatelessWidget {
                 'WELCOME',
                 style: TextStyle(fontSize: 20),
               ),
+            ),
+          ),
+          // Cards wrapped in a SingleChildScrollView for vertical scrolling
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                // First Card
+                Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.circular(25.0), // Set border radius here
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => const Inbox()),
+                      );
+                    },
+                    child: Container(
+                      height: 300, // Increase the height as needed
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25.0),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              'lib/Assets/HomePageImages/jobcard.jpg'), // Add your image asset path
+                          fit: BoxFit.cover,
+                          colorFilter: ColorFilter.mode(
+                              Colors.black.withOpacity(0.5),
+                              BlendMode
+                                  .dstATop), // Adjust opacity here (0.5 means 50% opacity)
+                        ),
+                      ),
+                      // child: ListTile(
+                      //   title: Text('Existing Job card'),
+                      //   // subtitle: Text('This is the first card content.'),
+                      // ),
+                      child: Center(
+                        child: Text(
+                          'Existing Job card',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                // Second Card
+                Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.circular(25.0), // Set border radius here
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                            builder: (context) => PendingJobCard()),
+                      );
+                    },
+                    child: Container(
+                      height: 300, // Increase the height as needed
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25.0),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              'lib/Assets/HomePageImages/pendingjobcard.jpg'), // Add your image asset path
+                          fit: BoxFit.cover,
+                          colorFilter: ColorFilter.mode(
+                              Colors.black.withOpacity(0.5),
+                              BlendMode
+                                  .dstATop), // Adjust opacity here (0.5 means 50% opacity)
+                        ),
+                      ),
+
+                      child: Center(
+                        child: Text(
+                          'Pending Job card',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                
+              ],
             ),
           ),
           // Positioned widget to show location at the center

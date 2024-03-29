@@ -28,6 +28,8 @@ flutter:
     - lib/Assets/Temple/madurai-meenakshi-amman-temple.webp
     - lib/Assets/Temple/tourists-at-meenakshi-amman-temple-in-madurai-india.webp
     - lib/Assets/Icon/LOGO.png
+    - lib/Assets/HomePageImages/jobcard.jpg
+    - lib/Assets/HomePageImages/pendingjobcard.jpg
     # Add more image paths here
 
 

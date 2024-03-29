@@ -1,3 +1,4 @@
+import 'package:codeflink/Pages/HomePage.dart';
 import 'package:codeflink/Pages/MemoryContainer.dart';
 import 'package:flutter/material.dart';
 
@@ -160,7 +161,10 @@ class _InboxState extends State<Inbox> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const HomePage()),
+            );
           },
         ),
       ),

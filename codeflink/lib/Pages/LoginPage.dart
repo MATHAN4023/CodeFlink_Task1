@@ -15,8 +15,10 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    String uname = "Test@gmail.com";
-    String upass = "Test@123";
+    String uname = "a";
+    String upass = "a";
+    // String uname = "Test@gmail.com";
+    // String upass = "Test@123";
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
