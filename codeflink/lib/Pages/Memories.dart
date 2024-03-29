@@ -6,7 +6,7 @@ class Memory {
   final String text;
   final String time;
   final IconData iconData;
-  final String location; // New field for location
+  final String location;
 
   Memory({
     required this.event,
@@ -152,7 +152,6 @@ class _InboxState extends State<Inbox> {
       iconData: Icons.location_city_sharp,
       location: 'Madurai',
     ),
-    // Add more Memory objects as needed
   ];
 
   List<Memory> filteredMemories = [];
@@ -167,10 +166,10 @@ class _InboxState extends State<Inbox> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("List Page"),
-        backgroundColor: Colors.purpleAccent,
-      ),
+      // appBar: AppBar(
+      //   title: Text("List Page"),
+      //   backgroundColor: Colors.purpleAccent,
+      // ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[

@@ -156,7 +156,7 @@ class _InboxState extends State<Inbox> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Existing Job Card"),
-        backgroundColor: Colors.redAccent,
+        // backgroundColor: Colors.redAccent,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
