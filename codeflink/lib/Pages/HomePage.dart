@@ -1,68 +1,67 @@
+import 'package:codeflink/Pages/CamaraAccess.dart';
 import 'package:codeflink/Pages/PendingJobCard.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart'; // Import geolocator package
 
-import 'CamaraAccess.dart'; // Import CamAccess
 import 'Inbox.dart';
 import 'LoginPage.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
-  // Function to get user's location
-  Future<void> _getLocation(BuildContext context) async {
-    try {
-      bool serviceEnabled;
-      LocationPermission permission;
-
-      // Check if location services are enabled
-      serviceEnabled = await Geolocator.isLocationServiceEnabled();
-      if (!serviceEnabled) {
-        print('Location services are disabled.');
-        return;
-      }
-
-      // Request location permission
-      permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.denied) {
-          print('Location permission is denied.');
-          return;
-        }
-      }
-
-      if (permission == LocationPermission.deniedForever) {
-        print(
-            'Location permissions are permanently denied, we cannot request permissions.');
-        return;
-      }
-
-      // Get user's current location
-      Position position = await Geolocator.getCurrentPosition();
-      // Display latitude and longitude in a dialog
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Current Location'),
-            content: Text(
-                'Latitude: ${position.latitude}\nLongitude: ${position.longitude}'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('Close'),
-              ),
-            ],
-          );
-        },
-      );
-    } catch (e) {
-      print('Error getting location: $e');
-    }
-  }
+  // // Function to get user's location
+  // Future<void> _getLocation(BuildContext context) async {
+  //   try {
+  //     bool serviceEnabled;
+  //     LocationPermission permission;
+  //
+  //     // Check if location services are enabled
+  //     serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  //     if (!serviceEnabled) {
+  //       print('Location services are disabled.');
+  //       return;
+  //     }
+  //
+  //     // Request location permission
+  //     permission = await Geolocator.checkPermission();
+  //     if (permission == LocationPermission.denied) {
+  //       permission = await Geolocator.requestPermission();
+  //       if (permission == LocationPermission.denied) {
+  //         print('Location permission is denied.');
+  //         return;
+  //       }
+  //     }
+  //
+  //     if (permission == LocationPermission.deniedForever) {
+  //       print(
+  //           'Location permissions are permanently denied, we cannot request permissions.');
+  //       return;
+  //     }
+  //
+  //     // Get user's current location
+  //     Position position = await Geolocator.getCurrentPosition();
+  //     // Display latitude and longitude in a dialog
+  //     showDialog(
+  //       context: context,
+  //       builder: (BuildContext context) {
+  //         return AlertDialog(
+  //           title: Text('Current Location'),
+  //           content: Text(
+  //               'Latitude: ${position.latitude}\nLongitude: ${position.longitude}'),
+  //           actions: <Widget>[
+  //             TextButton(
+  //               onPressed: () {
+  //                 Navigator.of(context).pop();
+  //               },
+  //               child: Text('Close'),
+  //             ),
+  //           ],
+  //         );
+  //       },
+  //     );
+  //   } catch (e) {
+  //     print('Error getting location: $e');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -70,16 +69,18 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Home Page"),
         backgroundColor: Colors.redAccent,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.camera),
-            onPressed: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const CamAccess()),
-              );
-            },
-          ),
-        ],
+
+        // //Camara Icon In Home Screen -
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(Icons.camera),
+        //     onPressed: () {
+        //       Navigator.of(context).pushReplacement(
+        //         MaterialPageRoute(builder: (context) => const CamAccess()),
+        //       );
+        //     },
+        //   ),
+        // ],
       ),
       drawer: Drawer(
         backgroundColor: Colors.white,
@@ -108,7 +109,7 @@ class HomePage extends StatelessWidget {
               height: 10,
             ),
             ListTile(
-              title: Text("New Job card"),
+              title: Text("Tracking Order"),
               leading: Icon(Icons.add_chart_rounded),
               onTap: () => Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const CamAccess()),
@@ -232,22 +233,62 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                
+                Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.circular(25.0), // Set border radius here
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                            builder: (context) => PendingJobCard()),
+                      );
+                    },
+                    child: Container(
+                      height: 300, // Increase the height as needed
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25.0),
+                        image: DecorationImage(
+                          image: AssetImage(
+                              'lib/Assets/HomePageImages/pendingjobcard.jpg'), // Add your image asset path
+                          fit: BoxFit.cover,
+                          colorFilter: ColorFilter.mode(
+                              Colors.black.withOpacity(0.5),
+                              BlendMode
+                                  .dstATop), // Adjust opacity here (0.5 means 50% opacity)
+                        ),
+                      ),
+
+                      child: Center(
+                        child: Text(
+                          'New Job card',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
           // Positioned widget to show location at the center
-          Positioned(
-            bottom: 16, // Adjust position as needed
-            left: 0,
-            right: 0,
-            child: FloatingActionButton(
-              onPressed: () =>
-                  _getLocation(context), // Call _getLocation function
-              tooltip: 'Get Location',
-              child: Icon(Icons.location_on),
-            ),
-          ),
+          // Positioned(
+          //   bottom: 16, // Adjust position as needed
+          //   left: 0,
+          //   right: 0,
+          //   child: FloatingActionButton(
+          //     onPressed: () =>
+          //         _getLocation(context), // Call _getLocation function
+          //     tooltip: 'Get Location',
+          //     child: Icon(Icons.location_on),
+          //   ),
+          // ),
         ],
       ),
     );
