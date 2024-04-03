@@ -112,7 +112,7 @@ class HomePage extends StatelessWidget {
               title: Text("Tracking Order"),
               leading: Icon(Icons.add_chart_rounded),
               onTap: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const CamAccess()),
+                MaterialPageRoute(builder: (context) => PendingJobCard()),
               ),
             ),
             Divider(
@@ -242,8 +242,7 @@ class HomePage extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
                       Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                            builder: (context) => PendingJobCard()),
+                        MaterialPageRoute(builder: (context) => CamAccess()),
                       );
                     },
                     child: Container(
