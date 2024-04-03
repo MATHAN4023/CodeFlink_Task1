@@ -1,5 +1,6 @@
 import 'package:codeflink/Pages/CamaraAccess.dart';
 import 'package:codeflink/Pages/PendingJobCard.dart';
+import 'package:codeflink/Pages/Trackingorder.dart';
 import 'package:flutter/material.dart';
 
 import 'Inbox.dart';
@@ -112,7 +113,7 @@ class HomePage extends StatelessWidget {
               title: Text("Tracking Order"),
               leading: Icon(Icons.add_chart_rounded),
               onTap: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => PendingJobCard()),
+                MaterialPageRoute(builder: (context) => Trackingorder()),
               ),
             ),
             Divider(

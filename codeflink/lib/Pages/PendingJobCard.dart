@@ -9,11 +9,11 @@ class _PendingJobCardState extends State<PendingJobCard> {
   List<String> tasks = [];
 
   TextEditingController taskController = TextEditingController();
-    List<String> orderStatus = [
-    "Order Placed",
-    "Processing",
-    "Shipped",
-    "Out for Delivery",
+  List<String> orderStatus = [
+    "Accepted Cards",
+    "Designing Cards",
+    "Customer Acceptance",
+    "Printing Cards",
     "Delivered"
   ];
 
@@ -21,7 +21,7 @@ class _PendingJobCardState extends State<PendingJobCard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Work Tracking'),
+        title: Text('Pending Job Cards'),
       ),
       body: ListView.builder(
         itemCount: orderStatus.length,
@@ -71,14 +71,14 @@ class _PendingJobCardState extends State<PendingJobCard> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text(
-                        index == orderStatus.length - 1
-                            ? "Delivered"
-                            : "5 days",
-                        style: TextStyle(
-                          fontSize: 16.0,
-                        ),
-                      ),
+                      // Text(
+                      //   index == orderStatus.length - 1
+                      //       ? "Delivered"
+                      //       : "5 days",
+                      //   style: TextStyle(
+                      //     fontSize: 16.0,
+                      //   ),
+                      // ),
                     ],
                   ),
                 ],
