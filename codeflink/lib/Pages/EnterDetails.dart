@@ -32,7 +32,21 @@ class _EnterDetailsState extends State<EnterDetails> {
               'Today Date: ${DateFormat('dd/MM/yyyy').format(selectedDate)}',
               style: TextStyle(fontSize: 16.0),
             ),
+            SizedBox(height: 10.0),
+            Text(
+              'Live Location: Location',
+              style: TextStyle(fontSize: 16.0),
+            ),
             SizedBox(height: 20.0),
+            TextFormField(
+              controller: siteNameController,
+              onChanged: (_) => _updateButtonState(),
+              decoration: InputDecoration(
+                labelText: 'Client Name',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 10.0),
             TextFormField(
               controller: siteNameController,
               onChanged: (_) => _updateButtonState(),
@@ -56,6 +70,24 @@ class _EnterDetailsState extends State<EnterDetails> {
               onChanged: (_) => _updateButtonState(),
               decoration: InputDecoration(
                 labelText: 'Width',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 10.0),
+            TextFormField(
+              controller: widthController,
+              onChanged: (_) => _updateButtonState(),
+              decoration: InputDecoration(
+                labelText: 'Breath',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 10.0),
+            TextFormField(
+              controller: widthController,
+              onChanged: (_) => _updateButtonState(),
+              decoration: InputDecoration(
+                labelText: 'Clamp',
                 border: OutlineInputBorder(),
               ),
             ),
