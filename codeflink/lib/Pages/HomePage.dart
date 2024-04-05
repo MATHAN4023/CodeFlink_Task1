@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Home Page"),
-        backgroundColor: Colors.redAccent,
+        // backgroundColor: Colors.redAccent,
 
         // //Camara Icon In Home Screen -
         // actions: [
@@ -145,136 +145,140 @@ class HomePage extends StatelessWidget {
             ),
           ),
           // Cards wrapped in a SingleChildScrollView for vertical scrolling
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                // First Card
-                Card(
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(25.0), // Set border radius here
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => const Inbox()),
-                      );
-                    },
-                    child: Container(
-                      height: 300, // Increase the height as needed
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25.0),
-                        image: DecorationImage(
-                          image: AssetImage(
-                              'lib/Assets/HomePageImages/jobcard.jpg'), // Add your image asset path
-                          fit: BoxFit.cover,
-                          colorFilter: ColorFilter.mode(
-                              Colors.black.withOpacity(0.5),
-                              BlendMode
-                                  .dstATop), // Adjust opacity here (0.5 means 50% opacity)
-                        ),
-                      ),
-                      // child: ListTile(
-                      //   title: Text('Existing Job card'),
-                      //   // subtitle: Text('This is the first card content.'),
-                      // ),
-                      child: Center(
-                        child: Text(
-                          'Existing Job card',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
+          Center(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(25.0), // Set border radius here
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => CamAccess()),
+                        );
+                      },
+                      child: Container(
+                        width: 400,
+                        height: 250, // Increase the height as needed
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25.0),
+                          image: DecorationImage(
+                            image: AssetImage(
+                                'lib/Assets/JobCard/New_job.png'), // Add your image asset path
+                            fit: BoxFit.cover,
+                            colorFilter: ColorFilter.mode(
+                                Colors.black.withOpacity(0.50),
+                                BlendMode
+                                    .dstATop), // Adjust opacity here (0.5 means 50% opacity)
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-                // Second Card
-                Card(
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(25.0), // Set border radius here
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                            builder: (context) => PendingJobCard()),
-                      );
-                    },
-                    child: Container(
-                      height: 300, // Increase the height as needed
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25.0),
-                        image: DecorationImage(
-                          image: AssetImage(
-                              'lib/Assets/HomePageImages/pendingjobcard.jpg'), // Add your image asset path
-                          fit: BoxFit.cover,
-                          colorFilter: ColorFilter.mode(
-                              Colors.black.withOpacity(0.5),
-                              BlendMode
-                                  .dstATop), // Adjust opacity here (0.5 means 50% opacity)
-                        ),
-                      ),
 
-                      child: Center(
-                        child: Text(
-                          'Pending Job card',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
+                        child: Center(
+                          child: Text(
+                            'New Job card',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30.0,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                Card(
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(25.0), // Set border radius here
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => CamAccess()),
-                      );
-                    },
-                    child: Container(
-                      height: 300, // Increase the height as needed
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25.0),
-                        image: DecorationImage(
-                          image: AssetImage(
-                              'lib/Assets/HomePageImages/pendingjobcard.jpg'), // Add your image asset path
-                          fit: BoxFit.cover,
-                          colorFilter: ColorFilter.mode(
-                              Colors.black.withOpacity(0.5),
-                              BlendMode
-                                  .dstATop), // Adjust opacity here (0.5 means 50% opacity)
+                  Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(25.0), // Set border radius here
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                              builder: (context) => const Inbox()),
+                        );
+                      },
+                      child: Container(
+                        width: 400,
+                        height: 250, // Increase the height as needed
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25.0),
+                          image: DecorationImage(
+                            image: AssetImage(
+                                'lib/Assets/JobCard/ExistingJob.png'), // Add your image asset path
+                            fit: BoxFit.cover,
+                            colorFilter: ColorFilter.mode(
+                                Colors.black.withOpacity(0.50),
+                                BlendMode
+                                    .dstATop), // Adjust opacity here (0.5 means 50% opacity)
+                          ),
+                        ),
+                        // child: ListTile(
+                        //   title: Text('Existing Job card'),
+                        //   // subtitle: Text('This is the first card content.'),
+                        // ),
+                        child: Center(
+                          child: Text(
+                            'Existing Job card',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30.0,
+                            ),
+                          ),
                         ),
                       ),
+                    ),
+                  ),
+                  Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(25.0), // Set border radius here
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                              builder: (context) => PendingJobCard()),
+                        );
+                      },
+                      child: Container(
+                        width: 400,
+                        height: 250, // Increase the height as needed
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25.0),
+                          image: DecorationImage(
+                            image: AssetImage(
+                                'lib/Assets/JobCard/pendingjob.png'), // Add your image asset path
+                            fit: BoxFit.cover,
+                            colorFilter: ColorFilter.mode(
+                                Colors.black.withOpacity(0.50),
+                                BlendMode
+                                    .dstATop), // Adjust opacity here (0.5 means 50% opacity)
+                          ),
+                        ),
 
-                      child: Center(
-                        child: Text(
-                          'New Job card',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
+                        child: Center(
+                          child: Text(
+                            'Pending Job card',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30.0,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           // Positioned widget to show location at the center

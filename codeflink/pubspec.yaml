@@ -31,6 +31,9 @@ flutter:
     - lib/Assets/Icon/LOGO.png
     - lib/Assets/HomePageImages/jobcard.jpg
     - lib/Assets/HomePageImages/pendingjobcard.jpg
-    # Add more image paths here
+    - lib/Assets/JobCard/ExistingJob.png
+    - lib/Assets/JobCard/New_job.png
+    - lib/Assets/JobCard/pendingjob.png
+
 
 
