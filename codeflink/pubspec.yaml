@@ -39,6 +39,9 @@ flutter:
     - lib/Assets/banners/banner1.webp
     - lib/Assets/banners/banner2.webp
     - lib/Assets/banners/banner3.webp
+    - lib/Assets/3d/newjob.png
+    - lib/Assets/3d/existing.png
+    - lib/Assets/3d/pending.png
 
 
 

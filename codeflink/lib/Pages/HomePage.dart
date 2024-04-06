@@ -20,16 +20,22 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.white,
         child: Column(
           children: <Widget>[
-            UserAccountsDrawerHeader(
-              otherAccountsPictures: [
-                CircleAvatar(
-                  child: (Text("Hi")),
-                )
-              ],
-              accountName: Text("Test"),
+            const UserAccountsDrawerHeader(
+              // decoration: BoxDecoration(
+              //   image: DecorationImage(
+              //     image: AssetImage("lib/Assets/3d/pending.png"),
+              //     fit: BoxFit.cover,
+              //   ),
+              // ),
+              // otherAccountsPictures: [
+              //   CircleAvatar(
+              //     child: (Text("Hi")),
+              //   )
+              // ],
+              accountName: Text("Admin"),
               accountEmail: Text("Test@gmail.com"),
               currentAccountPicture: CircleAvatar(
-                child: Text("Test"),
+                backgroundImage: AssetImage("lib/Assets/3d/pending.png"),
               ),
             ),
             ListTile(
@@ -54,7 +60,7 @@ class HomePage extends StatelessWidget {
             ),
             ListTile(
               title: Text("Current Location"),
-              leading: Icon(Icons.add_chart_rounded),
+              leading: Icon(Icons.location_on_outlined),
               onTap: () => Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => LocDemo()),
               ),
@@ -100,25 +106,58 @@ class HomePage extends StatelessWidget {
                       height: 200, // Increase the height as needed
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.0),
-                        image: DecorationImage(
-                          image: const AssetImage(
-                              'lib/Assets/JobCard/New_job.png'), // Add your image asset path
-                          fit: BoxFit.cover,
-                          colorFilter: ColorFilter.mode(
-                              Colors.black.withOpacity(0.50),
-                              BlendMode
-                                  .dstATop), // Adjust opacity here (0.5 means 50% opacity)
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Color.fromRGBO(72, 100, 246, 1.0),
+                            Color.fromRGBO(173, 2, 254, 1.0),
+                          ], // Change colors as needed
                         ),
                       ),
-                      child: const Center(
-                        child: Text(
-                          'New Job card',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
+                      child: Stack(
+                        children: [
+                          Positioned.fill(
+                            child: Align(
+                              alignment: Alignment.topCenter,
+                              child: Image.asset(
+                                'lib/Assets/3d/newjob.png',
+                                width: 130,
+                                height: 130,
+                              ),
+                            ),
                           ),
-                        ),
+                          Positioned.fill(
+                            child: Align(
+                              alignment: Alignment(0, 0.3),
+                              child: Text(
+                                'New Job card',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.0,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 10,
+                            right: 55,
+                            child: Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.grey[300],
+                              ),
+                              child: Icon(
+                                Icons.star,
+                                color: Colors.blueGrey,
+                                size: 30,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -132,7 +171,7 @@ class HomePage extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
                       Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => const Inbox()),
+                        MaterialPageRoute(builder: (context) => Inbox()),
                       );
                     },
                     child: Container(
@@ -140,25 +179,66 @@ class HomePage extends StatelessWidget {
                       height: 200, // Increase the height as needed
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.0),
-                        image: DecorationImage(
-                          image: const AssetImage(
-                              'lib/Assets/JobCard/ExistingJob.png'), // Add your image asset path
-                          fit: BoxFit.cover,
-                          colorFilter: ColorFilter.mode(
-                              Colors.black.withOpacity(0.50),
-                              BlendMode
-                                  .dstATop), // Adjust opacity here (0.5 means 50% opacity)
+                        gradient: const LinearGradient(
+                          begin: Alignment(-0.5, -1.0), // Begin from top-left
+                          end: Alignment(0.5, 1.0), // End at bottom-right
+                          colors: [
+                            Color.fromRGBO(253, 173, 0, 1.0),
+                            Color.fromRGBO(233, 109, 44, 1.0),
+                          ],
+                          stops: [
+                            0.1357,
+                            0.9838
+                          ], // Percentage stops for colors
+                          transform: GradientRotation(209.21 *
+                              3.14159265 /
+                              180), // Convert degree to radians
                         ),
                       ),
-                      child: const Center(
-                        child: Text(
-                          'Existing Job card',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
+
+                      child: Stack(
+                        children: [
+                          Positioned.fill(
+                            child: Align(
+                              alignment: Alignment.topCenter,
+                              child: Image.asset(
+                                'lib/Assets/3d/existing.png',
+                                width: 130,
+                                height: 130,
+                              ),
+                            ),
                           ),
-                        ),
+                          Positioned.fill(
+                            child: Align(
+                              alignment: Alignment(0, 0.3),
+                              child: Text(
+                                'Existing Job',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.0,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 10,
+                            right: 55,
+                            child: Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.grey[300],
+                              ),
+                              child: Icon(
+                                Icons.star,
+                                color: Colors.blueGrey,
+                                size: 30,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -183,29 +263,70 @@ class HomePage extends StatelessWidget {
                       );
                     },
                     child: Container(
-                      width: 300,
+                      width: 320,
                       height: 200, // Increase the height as needed
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.0),
-                        image: DecorationImage(
-                          image: const AssetImage(
-                              'lib/Assets/JobCard/pendingjob.png'), // Add your image asset path
-                          fit: BoxFit.cover,
-                          colorFilter: ColorFilter.mode(
-                              Colors.black.withOpacity(0.50),
-                              BlendMode
-                                  .dstATop), // Adjust opacity here (0.5 means 50% opacity)
+                        gradient: const LinearGradient(
+                          begin: Alignment(-0.5, -1.0), // Begin from top-left
+                          end: Alignment(0.5, 1.0), // End at bottom-right
+                          colors: [
+                            Color.fromRGBO(74, 210, 149, 1.0), // Lighter green
+                            Color.fromRGBO(20, 156, 78, 1.0)
+                          ],
+                          stops: [
+                            0.1357,
+                            0.9838
+                          ], // Percentage stops for colors
+                          transform: GradientRotation(209.21 *
+                              3.14159265 /
+                              180), // Convert degree to radians
                         ),
                       ),
-                      child: const Center(
-                        child: Text(
-                          'Pending Job card',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
+                      child: Stack(
+                        children: [
+                          Positioned.fill(
+                            child: Align(
+                              alignment: Alignment.topCenter,
+                              child: Image.asset(
+                                'lib/Assets/3d/pending.png',
+                                width: 130,
+                                height: 130,
+                              ),
+                            ),
                           ),
-                        ),
+                          const Positioned.fill(
+                            child: Align(
+                              alignment: Alignment(0, 0.3),
+                              child: Text(
+                                'Pending Job card',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.0,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 10,
+                            // right: 55,
+                            left: 135,
+                            child: Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.grey[300],
+                              ),
+                              child: Icon(
+                                Icons.star,
+                                color: Colors.blueGrey,
+                                size: 30,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
