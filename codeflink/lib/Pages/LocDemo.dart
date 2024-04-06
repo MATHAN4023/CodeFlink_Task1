@@ -3,10 +3,10 @@ import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(LocDemo());
 }
 
-class MyApp extends StatelessWidget {
+class LocDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

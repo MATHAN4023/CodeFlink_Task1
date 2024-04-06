@@ -1,4 +1,4 @@
-import 'package:codeflink/Pages/MyApp.dart';
+import 'package:codeflink/Pages/LocDemo.dart';
 import 'package:codeflink/Pages/PendingJobCard.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Home Page"),
       ),
-      drawer: Drawer(
+      drawer: Drawer(        
         backgroundColor: Colors.white,
         child: Column(
           children: <Widget>[
@@ -56,7 +56,7 @@ class HomePage extends StatelessWidget {
               title: Text("Current Location"),
               leading: Icon(Icons.add_chart_rounded),
               onTap: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => MyApp()),
+                MaterialPageRoute(builder: (context) => LocDemo()),
               ),
             ),
             Divider(
