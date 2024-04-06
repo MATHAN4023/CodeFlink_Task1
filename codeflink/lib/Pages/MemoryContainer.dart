@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:codeflink/Pages/Trackingorder.dart';
 import 'package:flutter/material.dart';
 
 class MemoryContainer1 extends StatefulWidget {
@@ -10,9 +11,9 @@ class MemoryContainer1 extends StatefulWidget {
 
 class _MemoryContainer1State extends State<MemoryContainer1> {
   final List<String> images = [
-    'lib/Assets/Temple/Colourful-temples.webp',
-    'lib/Assets/Temple/madurai-meenakshi-amman-temple.webp',
-    'lib/Assets/Temple/tourists-at-meenakshi-amman-temple-in-madurai-india.webp',
+    'lib/Assets/banners/banner1.webp',
+    'lib/Assets/banners/banner2.webp',
+    'lib/Assets/banners/banner3.webp',
   ];
 
   final CarouselController _carouselController = CarouselController();
@@ -126,6 +127,28 @@ class _MemoryContainer1State extends State<MemoryContainer1> {
                           ),
                         ],
                       ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            // Add your button functionality here
+                          },
+                          child: Text('Update'),
+                        ),
+                        SizedBox(width: 10.0), // Space between buttons
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Trackingorder()),
+                            );
+                          },
+                          child: Text('Status'),
+                        ),
+                      ],
                     ),
                   ],
                 ),
