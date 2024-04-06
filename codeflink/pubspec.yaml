@@ -36,6 +36,9 @@ flutter:
     - lib/Assets/JobCard/ExistingJob.png
     - lib/Assets/JobCard/New_job.png
     - lib/Assets/JobCard/pendingjob.png
+    - lib/Assets/3d/newjob.png
+    - lib/Assets/3d/existing.png
+    - lib/Assets/3d/pending.png
 
 
 
