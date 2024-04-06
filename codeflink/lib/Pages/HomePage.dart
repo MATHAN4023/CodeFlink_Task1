@@ -121,7 +121,7 @@ class HomePage extends StatelessWidget {
               height: 10,
             ),
             ListTile(
-              title: Text("Tracking Order"),
+              title: Text("Current Location"),
               leading: Icon(Icons.add_chart_rounded),
               onTap: () => Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => MyApp()),

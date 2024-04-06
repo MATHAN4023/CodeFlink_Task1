@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,6 +26,7 @@ class LocationDemo extends StatefulWidget {
 
 class _LocationDemoState extends State<LocationDemo> {
   Position? _currentPosition;
+  String? _currentAddress;
 
   @override
   void initState() {
@@ -38,6 +40,20 @@ class _LocationDemoState extends State<LocationDemo> {
           desiredAccuracy: LocationAccuracy.high);
       setState(() {
         _currentPosition = position;
+        _getAddressFromLatLng();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  _getAddressFromLatLng() async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+          _currentPosition!.latitude, _currentPosition!.longitude);
+      Placemark place = placemarks[0];
+      setState(() {
+        _currentAddress = "${place.name}, ${place.locality}, ${place.country}";
       });
     } catch (e) {
       print(e);
@@ -60,6 +76,10 @@ class _LocationDemoState extends State<LocationDemo> {
                   ),
                   Text(
                     'Longitude: ${_currentPosition!.longitude}',
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Address: $_currentAddress',
                   ),
                 ],
               )
