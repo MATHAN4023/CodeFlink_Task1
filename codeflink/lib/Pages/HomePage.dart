@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:codeflink/Pages/MyApp.dart';
+import 'package:codeflink/Pages/PendingJobCard.dart';
+import 'package:flutter/material.dart';
+
 import 'CamaraAccess.dart';
 import 'Inbox.dart';
 import 'LoginPage.dart';
-import 'PendingJobCard.dart';
 import 'Trackingorder.dart';
 
 class HomePage extends StatelessWidget {
@@ -165,45 +166,51 @@ class HomePage extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20), // Add some space between rows
-            SizedBox(
-              child: Card(
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(25.0), // Set border radius here
-                ),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => PendingJobCard()),
-                    );
-                  },
-                  child: Container(
-                    height: 250,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25.0),
-                      image: DecorationImage(
-                        image: AssetImage('lib/Assets/JobCard/pendingjob.png'),
-                        fit: BoxFit.cover,
-                        colorFilter: ColorFilter.mode(
-                          Colors.black.withOpacity(0.50),
-                          BlendMode.dstATop,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.circular(25.0), // Set border radius here
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                            builder: (context) => PendingJobCard()),
+                      );
+                    },
+                    child: Container(
+                      width: 390,
+                      height: 250, // Increase the height as needed
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25.0),
+                        image: DecorationImage(
+                          image: const AssetImage(
+                              'lib/Assets/JobCard/pendingjob.png'), // Add your image asset path
+                          fit: BoxFit.cover,
+                          colorFilter: ColorFilter.mode(
+                              Colors.black.withOpacity(0.50),
+                              BlendMode
+                                  .dstATop), // Adjust opacity here (0.5 means 50% opacity)
                         ),
                       ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Pending Job card',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30.0,
+                      child: const Center(
+                        child: Text(
+                          'Pending Job card',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
           ],
         ),
