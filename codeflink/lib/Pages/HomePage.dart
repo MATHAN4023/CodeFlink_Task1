@@ -96,8 +96,8 @@ class HomePage extends StatelessWidget {
                       );
                     },
                     child: Container(
-                      width: 180,
-                      height: 250, // Increase the height as needed
+                      width: 150,
+                      height: 200, // Increase the height as needed
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.0),
                         image: DecorationImage(
@@ -136,8 +136,8 @@ class HomePage extends StatelessWidget {
                       );
                     },
                     child: Container(
-                      width: 180,
-                      height: 250, // Increase the height as needed
+                      width: 150,
+                      height: 200, // Increase the height as needed
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.0),
                         image: DecorationImage(
@@ -183,8 +183,8 @@ class HomePage extends StatelessWidget {
                       );
                     },
                     child: Container(
-                      width: 390,
-                      height: 250, // Increase the height as needed
+                      width: 300,
+                      height: 200, // Increase the height as needed
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.0),
                         image: DecorationImage(

@@ -17,6 +17,15 @@ class _MemoryContainer1State extends State<MemoryContainer1> {
 
   final CarouselController _carouselController = CarouselController();
 
+  String siteName = 'Text';
+  String height = '120cm';
+  String width = '120';
+  String phoneNo = '1234567890';
+  String emailAddress = 'TEst@gmail.com';
+  String description = 'Box contains Text';
+
+  bool isEditing = false;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,6 +40,16 @@ class _MemoryContainer1State extends State<MemoryContainer1> {
               Navigator.of(context).pop();
             },
           ),
+          actions: [
+            IconButton(
+              icon: Icon(isEditing ? Icons.done : Icons.edit),
+              onPressed: () {
+                setState(() {
+                  isEditing = !isEditing;
+                });
+              },
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -101,36 +120,71 @@ class _MemoryContainer1State extends State<MemoryContainer1> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildDetailRow(label: 'Site Name', value: 'Text'),
-                    _buildDetailRow(label: 'Height', value: '120cm'),
-                    _buildDetailRow(label: 'Width', value: '120'),
-                    _buildDetailRow(label: 'Phone No', value: '1234567890'),
                     _buildDetailRow(
-                        label: 'Email Address', value: 'TEst@gmail.com'),
-                    _buildDetailRow(label: 'Description', value: ''),
-                    Container(
-                      padding: EdgeInsets.all(40.0),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 10.0),
-                          Text(
-                            'Details About the Customer requirements',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                            ),
-                          ),
-                        ],
-                      ),
+                      label: 'Site Name',
+                      value: siteName,
+                      editable: isEditing,
                     ),
+                    _buildDetailRow(
+                      label: 'Height',
+                      value: height,
+                      editable: isEditing,
+                    ),
+                    _buildDetailRow(
+                      label: 'Width',
+                      value: width,
+                      editable: isEditing,
+                    ),
+                    _buildDetailRow(
+                      label: 'Phone No',
+                      value: phoneNo,
+                      editable: isEditing,
+                    ),
+                    _buildDetailRow(
+                      label: 'Email Address',
+                      value: emailAddress,
+                      editable: isEditing,
+                    ),
+                    _buildDetailRow(
+                      label: 'Description',
+                      value: description,
+                      editable: isEditing,
+                    ),
+                    if (isEditing) ...[
+                      SizedBox(height: 20.0),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            isEditing = false;
+                          });
+                        },
+                        child: Text('Update'),
+                      ),
+                    ],
+                    // SizedBox(height: 20.0),
+                    // Container(
+                    //   padding: EdgeInsets.all(40.0),
+                    //   decoration: BoxDecoration(
+                    //     color: Colors.grey[200],
+                    //     borderRadius: BorderRadius.circular(10.0),
+                    //   ),
+                    //   child: Column(
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     children: [
+                    //       SizedBox(height: 10.0),
+                    //       Text(
+                    //         'Details About the Customer requirements',
+                    //         style: TextStyle(
+                    //           fontSize: 16.0,
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
-              SizedBox(height: 20.0), // Add some extra space at the bottom
+              SizedBox(height: 20.0),
             ],
           ),
         ),
@@ -138,7 +192,9 @@ class _MemoryContainer1State extends State<MemoryContainer1> {
     );
   }
 
-  Widget _buildDetailRow({required String label, required String value}) {
+  Widget _buildDetailRow(
+      {required String label, required String value, required bool editable}) {
+    TextEditingController controller = TextEditingController(text: value);
     return Padding(
       padding: EdgeInsets.only(bottom: 8.0),
       child: Row(
@@ -148,10 +204,46 @@ class _MemoryContainer1State extends State<MemoryContainer1> {
             '$label:',
             style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
           ),
-          Text(
-            value,
-            style: TextStyle(fontSize: 16.0),
-          ),
+          editable
+              ? SizedBox(
+                  width: 200.0,
+                  height: 40.0,
+                  child: TextFormField(
+                    initialValue: value,
+                    // controller: controller,
+                    onChanged: (newValue) {
+                      setState(() {
+                        switch (label) {
+                          case 'Site Name':
+                            siteName = newValue;
+                            break;
+                          case 'Height':
+                            height = newValue;
+                            break;
+                          case 'Width':
+                            width = newValue;
+                            break;
+                          case 'Phone No':
+                            phoneNo = newValue;
+                            break;
+                          case 'Email Address':
+                            emailAddress = newValue;
+                            break;
+                          case 'Description':
+                            description = newValue;
+                            break;
+                        }
+                      });
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                )
+              : Text(
+                  value,
+                  style: TextStyle(fontSize: 16.0),
+                ),
         ],
       ),
     );
