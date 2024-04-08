@@ -16,6 +16,9 @@ dependencies:
   intl: ^0.17.0
   geolocator: ^10.1.0
   order_tracker: ^0.0.2
+  google_maps_flutter: ^2.6.0
+  location: ^6.0.1
+
 
 dev_dependencies:
   flutter_test:
@@ -42,6 +45,8 @@ flutter:
     - lib/Assets/3d/newjob.png
     - lib/Assets/3d/existing.png
     - lib/Assets/3d/pending.png
+    - lib/Assets/Profile/nithi.jpg
+    - lib/Assets/Profile/mathan.png
 
 
 
