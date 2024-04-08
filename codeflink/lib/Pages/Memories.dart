@@ -41,64 +41,54 @@ class MemoryContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.blueAccent, Colors.lightBlueAccent],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Card(
-          elevation: 3,
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          child: Padding(
-            padding: EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Icon(
-                      iconData,
-                      color: Colors.blue,
-                    ),
-                    SizedBox(width: 5),
-                    Text(
-                      event,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "Username: $username",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+      child: Card(
+        elevation: 3,
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    iconData,
+                    color: Colors.blue,
                   ),
+                  SizedBox(width: 5),
+                  Text(
+                    event,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              Text(
+                "Username: $username",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
-                SizedBox(height: 5),
-                Text(
-                  "Description: $text",
-                  style: TextStyle(fontSize: 16),
-                ),
-                SizedBox(height: 5),
-                Text(
-                  "Location: $location",
-                  style: TextStyle(color: Colors.grey),
-                ),
-                SizedBox(height: 5),
-                Text(
-                  "Time: $time",
-                  style: TextStyle(color: Colors.grey),
-                ),
-                SizedBox(height: 10),
-              ],
-            ),
+              ),
+              SizedBox(height: 5),
+              Text(
+                "Description: $text",
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 5),
+              Text(
+                "Location: $location",
+                style: TextStyle(color: Colors.grey),
+              ),
+              SizedBox(height: 5),
+              Text(
+                "Time: $time",
+                style: TextStyle(color: Colors.grey),
+              ),
+              SizedBox(height: 10),
+            ],
           ),
         ),
       ),
@@ -148,7 +138,7 @@ class _InboxState extends State<Inbox> {
     ),
     Memory(
       event: 'Vishald mall 2',
-      username: 'Ramm',
+      username: 'Ram',
       text: 'One OF the Best Mall in Madurai.',
       time: '12:00 PM',
       iconData: Icons.location_city_sharp,
@@ -176,6 +166,10 @@ class _InboxState extends State<Inbox> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //   title: Text("List Page"),
+      //   backgroundColor: Colors.purpleAccent,
+      // ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[

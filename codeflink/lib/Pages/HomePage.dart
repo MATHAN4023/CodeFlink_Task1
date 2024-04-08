@@ -1,7 +1,5 @@
 import 'package:codeflink/Pages/LocDemo.dart';
 import 'package:codeflink/Pages/PendingJobCard.dart';
-import 'package:codeflink/Pages/Profile.dart';
-import 'package:codeflink/Pages/UserProfile.dart';
 import 'package:flutter/material.dart';
 
 import 'CamaraAccess.dart';
@@ -18,11 +16,22 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Home Page"),
       ),
-      drawer: Drawer(
+      drawer: Drawer(        
         backgroundColor: Colors.white,
         child: Column(
           children: <Widget>[
             const UserAccountsDrawerHeader(
+              // decoration: BoxDecoration(
+              //   image: DecorationImage(
+              //     image: AssetImage("lib/Assets/3d/pending.png"),
+              //     fit: BoxFit.cover,
+              //   ),
+              // ),
+              // otherAccountsPictures: [
+              //   CircleAvatar(
+              //     child: (Text("Hi")),
+              //   )
+              // ],
               accountName: Text("Admin"),
               accountEmail: Text("Test@gmail.com"),
               currentAccountPicture: CircleAvatar(
@@ -83,7 +92,8 @@ class HomePage extends StatelessWidget {
                 Card(
                   elevation: 5,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0),
+                    borderRadius:
+                        BorderRadius.circular(25.0), // Set border radius here
                   ),
                   child: InkWell(
                     onTap: () {
@@ -93,7 +103,7 @@ class HomePage extends StatelessWidget {
                     },
                     child: Container(
                       width: 150,
-                      height: 200,
+                      height: 200, // Increase the height as needed
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.0),
                         gradient: LinearGradient(
@@ -102,7 +112,7 @@ class HomePage extends StatelessWidget {
                           colors: [
                             Color.fromRGBO(72, 100, 246, 1.0),
                             Color.fromRGBO(173, 2, 254, 1.0),
-                          ],
+                          ], // Change colors as needed
                         ),
                       ),
                       child: Stack(
@@ -155,7 +165,8 @@ class HomePage extends StatelessWidget {
                 Card(
                   elevation: 5,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0),
+                    borderRadius:
+                        BorderRadius.circular(25.0), // Set border radius here
                   ),
                   child: InkWell(
                     onTap: () {
@@ -165,21 +176,26 @@ class HomePage extends StatelessWidget {
                     },
                     child: Container(
                       width: 150,
-                      height: 200,
+                      height: 200, // Increase the height as needed
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.0),
                         gradient: const LinearGradient(
-                          begin: Alignment(-0.5, -1.0),
-                          end: Alignment(0.5, 1.0),
+                          begin: Alignment(-0.5, -1.0), // Begin from top-left
+                          end: Alignment(0.5, 1.0), // End at bottom-right
                           colors: [
                             Color.fromRGBO(253, 173, 0, 1.0),
                             Color.fromRGBO(233, 109, 44, 1.0),
                           ],
-                          stops: [0.1357, 0.9838],
-                          transform:
-                              GradientRotation(209.21 * 3.14159265 / 180),
+                          stops: [
+                            0.1357,
+                            0.9838
+                          ], // Percentage stops for colors
+                          transform: GradientRotation(209.21 *
+                              3.14159265 /
+                              180), // Convert degree to radians
                         ),
                       ),
+
                       child: Stack(
                         children: [
                           Positioned.fill(
@@ -229,14 +245,15 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 20), // Add some space between rows
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Card(
                   elevation: 5,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0),
+                    borderRadius:
+                        BorderRadius.circular(25.0), // Set border radius here
                   ),
                   child: InkWell(
                     onTap: () {
@@ -247,19 +264,23 @@ class HomePage extends StatelessWidget {
                     },
                     child: Container(
                       width: 320,
-                      height: 200,
+                      height: 200, // Increase the height as needed
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25.0),
                         gradient: const LinearGradient(
-                          begin: Alignment(-0.5, -1.0),
-                          end: Alignment(0.5, 1.0),
+                          begin: Alignment(-0.5, -1.0), // Begin from top-left
+                          end: Alignment(0.5, 1.0), // End at bottom-right
                           colors: [
-                            Color.fromRGBO(74, 210, 149, 1.0),
+                            Color.fromRGBO(74, 210, 149, 1.0), // Lighter green
                             Color.fromRGBO(20, 156, 78, 1.0)
                           ],
-                          stops: [0.1357, 0.9838],
-                          transform:
-                              GradientRotation(209.21 * 3.14159265 / 180),
+                          stops: [
+                            0.1357,
+                            0.9838
+                          ], // Percentage stops for colors
+                          transform: GradientRotation(209.21 *
+                              3.14159265 /
+                              180), // Convert degree to radians
                         ),
                       ),
                       child: Stack(
@@ -289,6 +310,7 @@ class HomePage extends StatelessWidget {
                           ),
                           Positioned(
                             bottom: 10,
+                            // right: 55,
                             left: 135,
                             child: Container(
                               width: 40,
@@ -310,136 +332,6 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-            SizedBox(height: 40),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Text(
-                    // 'Existing Employee',
-                    'EXISTING EMPLOYEE',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(right: 30),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => Profile()),
-                      );
-                    },
-                    child: Icon(Icons.add),
-                  ),
-                ),
-              ],
-            ),
-            GestureDetector(
-              onTap: () {
-                // Navigate to other page
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => UserProfile()),
-                );
-              },
-              child: Card(
-                elevation: 5,
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundImage:
-                            AssetImage("lib/Assets/Profile/nithi.jpg"),
-                      ),
-                      SizedBox(width: 20),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Nitheshwaran",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            "Printer",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Spacer(),
-                      IconButton(
-                        icon: Icon(Icons.edit),
-                        onPressed: () {
-                          // Implement edit functionality
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                // Navigate to other page
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => UserProfile()),
-                );
-              },
-              child: Card(
-                elevation: 5,
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundImage:
-                            AssetImage("lib/Assets/Profile/mathan.png"),
-                      ),
-                      SizedBox(width: 20),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Mathan",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            "Designer",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Spacer(),
-                      IconButton(
-                        icon: Icon(Icons.edit),
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
-                ),
-              ),
             ),
           ],
         ),

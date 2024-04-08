@@ -134,7 +134,7 @@ class _InboxState extends State<Inbox> {
     ),
     Memory(
       event: 'Vishald mall 3',
-      username: 'Rammm',
+      username: 'Ram',
       text: 'One OF the Best Mall in Madurai.',
       time: '12:00 PM',
       iconData: Icons.location_city_sharp,
