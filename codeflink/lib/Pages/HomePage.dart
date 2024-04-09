@@ -1,4 +1,5 @@
 import 'package:codeflink/Pages/LocDemo.dart';
+import 'package:codeflink/Pages/AcceptedJobCardsPage.dart';
 import 'package:codeflink/Pages/PendingJobCard.dart';
 import 'package:codeflink/Pages/Profile.dart';
 import 'package:codeflink/Pages/UserProfile.dart';
@@ -54,6 +55,16 @@ class HomePage extends StatelessWidget {
               leading: Icon(Icons.location_on_outlined),
               onTap: () => Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => LocDemo()),
+              ),
+            ),
+            Divider(
+              height: 10,
+            ),
+            ListTile(
+              title: Text("cards"),
+              leading: Icon(Icons.location_on_outlined),
+              onTap: () => Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => AcceptedJobCardsPage()),
               ),
             ),
             Divider(
