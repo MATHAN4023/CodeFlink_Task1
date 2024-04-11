@@ -22,22 +22,14 @@ class AcceptedJobCardsPage extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   // Sample JSON data
   final List<String> jsonData = [
-    '{"title": "Card 1", "subtitle": "Subtitle 1", "content": "Content 1"}',
-    '{"title": "Card 2", "subtitle": "Subtitle 2", "content": "Content 2"}',
-    '{"title": "Card 3", "subtitle": "Subtitle 3", "content": "Content 3"}',
-    '{"title": "Card 4", "subtitle": "Subtitle 4", "content": "Content 4"}',
-    '{"title": "Card 5", "subtitle": "Subtitle 5", "content": "Content 5"}',
-    '{"title": "Card 6", "subtitle": "Subtitle 6", "content": "Content 6"}',
-    '{"title": "Card 7", "subtitle": "Subtitle 7", "content": "Content 7"}',
-    '{"title": "Card 8", "subtitle": "Subtitle 8", "content": "Content 8"}',
-    '{"title": "Card 1", "subtitle": "Subtitle 1", "content": "Content 1"}',
-    '{"title": "Card 2", "subtitle": "Subtitle 2", "content": "Content 2"}',
-    '{"title": "Card 3", "subtitle": "Subtitle 3", "content": "Content 3"}',
-    '{"title": "Card 4", "subtitle": "Subtitle 4", "content": "Content 4"}',
-    '{"title": "Card 5", "subtitle": "Subtitle 5", "content": "Content 5"}',
-    '{"title": "Card 6", "subtitle": "Subtitle 6", "content": "Content 6"}',
-    '{"title": "Card 7", "subtitle": "Subtitle 7", "content": "Content 7"}',
-    '{"title": "Card 8", "subtitle": "Subtitle 8", "content": "Content 8"}',
+    '{"title": "Arangam Artisans", "subtitle": "Gandhipuram", "content": "11:29PM"}',
+    '{"title": "Thamarai Textiles", "subtitle": "Gandhipuram", "content": "12:22PM"}',
+    '{"title": "Vannam Variety Store", "subtitle": "thudiyalur", "content": "1:00PM"}',
+    '{"title": "Kaaviyam Creations", "subtitle": "Gandhipuram", "content": "3:23PM"}',
+    '{"title": "Ilamai Emporium", "subtitle": "thudiyalur", "content": "14:29PM"}',
+    '{"title": "Oviyam Outfitters", "subtitle": "Gandhipuram", "content": "6:30PM"}',
+    '{"title": "Thendral Traders", "subtitle": "thudiyalur", "content": "8:00PM"}',
+    '{"title": "Kuyil Couturers", "subtitle": "Gandhipuram", "content": "11:29AM"}',
   ];
 
   @override

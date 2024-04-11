@@ -83,14 +83,6 @@ class _PendingJobCardState extends State<PendingJobCard> {
                       ),
                     ),
                     SizedBox(height: 8.0),
-                    Text(
-                      "Your order is ${index == orderStatus.length - 1 ? 'complete' : 'in progress'}",
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        color: Colors.grey[800],
-                      ),
-                    ),
-                    SizedBox(height: 8.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

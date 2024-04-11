@@ -143,6 +143,15 @@ class _EnterDetailsState extends State<EnterDetails> {
               controller: widthController,
               onChanged: (_) => _updateButtonState(),
               decoration: InputDecoration(
+                labelText: 'Pool',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 10.0),
+            TextFormField(
+              controller: widthController,
+              onChanged: (_) => _updateButtonState(),
+              decoration: InputDecoration(
                 labelText: 'Clamp',
                 border: OutlineInputBorder(),
               ),
