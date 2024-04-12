@@ -1,5 +1,6 @@
 import 'package:codeflink/Pages/LocDemo.dart';
 import 'package:codeflink/Pages/AcceptedJobCardsPage.dart';
+import 'package:codeflink/Pages/LoginPageTest.dart';
 import 'package:codeflink/Pages/PendingJobCard.dart';
 import 'package:codeflink/Pages/Profile.dart';
 import 'package:codeflink/Pages/UserProfile.dart';
@@ -11,21 +12,27 @@ import 'LoginPage.dart';
 import 'Trackingorder.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final String welcomeMessage;
+  HomePage({required this.welcomeMessage});
+  // const str = welcomeMessage;
+
+  // const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String userRole = welcomeMessage;
+    print(userRole);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Page"),
+        title: Text('${welcomeMessage}'),
       ),
       drawer: Drawer(
         backgroundColor: Colors.white,
         child: Column(
           children: <Widget>[
             const UserAccountsDrawerHeader(
-              accountName: Text("Admin"),
-              accountEmail: Text("Test@gmail.com"),
+              accountName: Text('Username'),
+              accountEmail: Text("Username@gmail.com"),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage("lib/Assets/3d/pending.png"),
               ),
@@ -34,7 +41,10 @@ class HomePage extends StatelessWidget {
               title: Text("Home Page"),
               leading: Icon(Icons.home_filled),
               onTap: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const HomePage()),
+                MaterialPageRoute(
+                    builder: (context) => HomePage(
+                          welcomeMessage: welcomeMessage,
+                        )),
               ),
             ),
             Divider(
@@ -61,6 +71,16 @@ class HomePage extends StatelessWidget {
               height: 10,
             ),
             ListTile(
+              title: Text("Login Demo"),
+              leading: Icon(Icons.location_on_outlined),
+              onTap: () => Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => LoginPageTest()),
+              ),
+            ),
+            Divider(
+              height: 10,
+            ),
+            ListTile(
               title: Text("cards"),
               leading: Icon(Icons.location_on_outlined),
               onTap: () => Navigator.of(context).pushReplacement(
@@ -75,7 +95,7 @@ class HomePage extends StatelessWidget {
               title: Text("LOGOUT"),
               leading: Icon(Icons.logout_sharp),
               onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const LoginPage()),
+                MaterialPageRoute(builder: (context) => LoginPageTest()),
               ),
             ),
             Divider(
@@ -169,11 +189,23 @@ class HomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(25.0),
                   ),
                   child: InkWell(
+                    // onTap: () {
+                    //   Navigator.of(context).pushReplacement(
+                    //     MaterialPageRoute(
+                    //         builder: (context) => Inbox(
+                    //             welcomeMessag: "welcomeMessage",
+                    //             )),
+                    //   );
+                    // },
                     onTap: () {
                       Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => Inbox()),
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              Inbox(welcomeMessage: welcomeMessage),
+                        ),
                       );
                     },
+
                     child: Container(
                       width: 150,
                       height: 200,
@@ -323,135 +355,253 @@ class HomePage extends StatelessWidget {
               ],
             ),
             SizedBox(height: 40),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Text(
-                    // 'Existing Employee',
-                    'EXISTING EMPLOYEE',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+            //  if(userRole == 'admin'){
+            //   Text("Hello world")
+            // }
+            Visibility(
+              visible: userRole ==
+                  'admin', // Replace 'condition' with your actual condition
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Text(
+                      'EXISTING EMPLOYEE',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(right: 30),
-                  child: GestureDetector(
+                  Padding(
+                    padding: EdgeInsets.only(right: 30),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => Profile()),
+                        );
+                      },
+                      child: Icon(Icons.add),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Visibility(
+              visible: userRole == 'admin',
+              child: Column(
+                children: [
+                  GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => Profile()),
+                      // Navigate to other page
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => UserProfile()),
                       );
                     },
-                    child: Icon(Icons.add),
-                  ),
-                ),
-              ],
-            ),
-            GestureDetector(
-              onTap: () {
-                // Navigate to other page
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => UserProfile()),
-                );
-              },
-              child: Card(
-                elevation: 5,
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundImage:
-                            AssetImage("lib/Assets/Profile/nithi.jpg"),
-                      ),
-                      SizedBox(width: 20),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Nitheshwaran",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                    child: Card(
+                      elevation: 5,
+                      margin:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 30,
+                              backgroundImage:
+                                  AssetImage("lib/Assets/Profile/nithi.jpg"),
                             ),
-                          ),
-                          Text(
-                            "Printer",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey,
+                            SizedBox(width: 20),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Nitheshwaran",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "Printer",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
+                            Spacer(),
+                            IconButton(
+                              icon: Icon(Icons.edit),
+                              onPressed: () {
+                                // Implement edit functionality
+                              },
+                            ),
+                          ],
+                        ),
                       ),
-                      Spacer(),
-                      IconButton(
-                        icon: Icon(Icons.edit),
-                        onPressed: () {
-                          // Implement edit functionality
-                        },
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                  GestureDetector(
+                    onTap: () {
+                      // Navigate to other page
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => UserProfile()),
+                      );
+                    },
+                    child: Card(
+                      elevation: 5,
+                      margin:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 30,
+                              backgroundImage:
+                                  AssetImage("lib/Assets/Profile/mathan.png"),
+                            ),
+                            SizedBox(width: 20),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Mathan",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "Designer",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Spacer(),
+                            IconButton(
+                              icon: Icon(Icons.edit),
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                // Navigate to other page
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => UserProfile()),
-                );
-              },
-              child: Card(
-                elevation: 5,
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundImage:
-                            AssetImage("lib/Assets/Profile/mathan.png"),
-                      ),
-                      SizedBox(width: 20),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Mathan",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            "Designer",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Spacer(),
-                      IconButton(
-                        icon: Icon(Icons.edit),
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+
+            // GestureDetector(
+            //   onTap: () {
+            //     // Navigate to other page
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => UserProfile()),
+            //     );
+            //   },
+            //   child: Card(
+            //     elevation: 5,
+            //     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            //     child: Padding(
+            //       padding: EdgeInsets.all(10),
+            //       child: Row(
+            //         children: [
+            //           CircleAvatar(
+            //             radius: 30,
+            //             backgroundImage:
+            //                 AssetImage("lib/Assets/Profile/nithi.jpg"),
+            //           ),
+            //           SizedBox(width: 20),
+            //           Column(
+            //             crossAxisAlignment: CrossAxisAlignment.start,
+            //             children: [
+            //               Text(
+            //                 "Nitheshwaran",
+            //                 style: TextStyle(
+            //                   fontSize: 18,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               ),
+            //               Text(
+            //                 "Printer",
+            //                 style: TextStyle(
+            //                   fontSize: 16,
+            //                   color: Colors.grey,
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //           Spacer(),
+            //           IconButton(
+            //             icon: Icon(Icons.edit),
+            //             onPressed: () {
+            //               // Implement edit functionality
+            //             },
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // GestureDetector(
+            //   onTap: () {
+            //     // Navigate to other page
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => UserProfile()),
+            //     );
+            //   },
+            //   child: Card(
+            //     elevation: 5,
+            //     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            //     child: Padding(
+            //       padding: EdgeInsets.all(10),
+            //       child: Row(
+            //         children: [
+            //           CircleAvatar(
+            //             radius: 30,
+            //             backgroundImage:
+            //                 AssetImage("lib/Assets/Profile/mathan.png"),
+            //           ),
+            //           SizedBox(width: 20),
+            //           Column(
+            //             crossAxisAlignment: CrossAxisAlignment.start,
+            //             children: [
+            //               Text(
+            //                 "Mathan",
+            //                 style: TextStyle(
+            //                   fontSize: 18,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               ),
+            //               Text(
+            //                 "Designer",
+            //                 style: TextStyle(
+            //                   fontSize: 16,
+            //                   color: Colors.grey,
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //           Spacer(),
+            //           IconButton(
+            //             icon: Icon(Icons.edit),
+            //             onPressed: () {},
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

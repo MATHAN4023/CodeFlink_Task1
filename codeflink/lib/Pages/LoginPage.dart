@@ -83,12 +83,12 @@ class _LoginPageState extends State<LoginPage> {
                     String username = _usernameController.text;
                     String password = _passwordController.text;
                     if (username == '$uname' && password == '$upass') {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => HomePage(),
+                      //   ),
+                      // );
                     } else if (username == '$uname' && password != '$upass') {
                       showDialog(
                         context: context,

@@ -21,6 +21,8 @@ class Memory {
 }
 
 class MemoryContainer extends StatelessWidget {
+  // final String welcomeMessage;
+
   final String event;
   final String username;
   final String text;
@@ -37,6 +39,7 @@ class MemoryContainer extends StatelessWidget {
     required this.iconData,
     required this.location,
     required this.onTap,
+    // required this.welcomeMessage
   });
 
   @override
@@ -100,7 +103,10 @@ class MemoryContainer extends StatelessWidget {
 }
 
 class Inbox extends StatefulWidget {
-  const Inbox({Key? key}) : super(key: key);
+  final String welcomeMessage;
+  Inbox({required this.welcomeMessage});
+
+  // const Inbox({Key? key}) : super(key: key);
 
   @override
   State<Inbox> createState() => _InboxState();
@@ -157,16 +163,16 @@ class _InboxState extends State<Inbox> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Existing Job Card"),
-        // backgroundColor: Colors.redAccent,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
-            );
-          },
-        ),
+        //------- backgroundColor: Colors.redAccent,
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back),
+        //   onPressed: () {
+        //     Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) => const HomePage()),
+        //     );
+        //   },
+        // ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -209,6 +215,8 @@ class _InboxState extends State<Inbox> {
           time: memory.time,
           iconData: memory.iconData,
           location: memory.location,
+          // welcomeMessage: "memory",
+
           onTap: () {
             Navigator.push(
               context,
@@ -238,6 +246,6 @@ class _InboxState extends State<Inbox> {
 
 void main() {
   runApp(MaterialApp(
-    home: Inbox(),
+    home: Inbox(welcomeMessage: ''),
   ));
 }

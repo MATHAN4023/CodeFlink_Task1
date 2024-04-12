@@ -69,16 +69,16 @@ class _CamAccessState extends State<CamAccess> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Camera Preview'),
-        // Adding a back button to the app bar
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            );
-          },
-        ),
+        // ------- Adding a back button to the app bar
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back),
+        //   onPressed: () {
+        //     Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) => HomePage()),
+        //     );
+        //   },
+        // ),
       ),
       body: Column(
         children: [
