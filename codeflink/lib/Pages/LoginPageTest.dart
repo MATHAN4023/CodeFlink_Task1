@@ -1,5 +1,12 @@
-import 'package:codeflink/Pages/HomePage.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart'; // Import LatLng
+import 'package:location/location.dart' as location;
+import 'package:location/location.dart';
+
+import 'HomePage.dart';
 
 enum UserRole {
   admin,
@@ -8,16 +15,58 @@ enum UserRole {
 }
 
 class AuthService {
-  // Simulate authentication process
+  final location.Location _location = location.Location();
+  LocationData? currentLocation;
+  static String? locationName; // Declare locationName as a static variable
+
   Future<UserRole?> login(String username, String password) async {
-    // Your authentication logic goes here
-    // For demo, return a hardcoded role based on username/password
     if (username == "admin" && password == "admin") {
       return UserRole.admin;
     } else if (username == "user" && password == "user") {
       return UserRole.user;
     } else {
-      return null; // Invalid credentials
+      return null;
+    }
+  }
+
+  Future<void> fetchLocation() async {
+    try {
+      bool serviceEnabled = await _location.serviceEnabled();
+      if (!serviceEnabled) {
+        serviceEnabled = await _location.requestService();
+        if (!serviceEnabled) {
+          return;
+        }
+      }
+
+      location.PermissionStatus permissionGranted =
+          await _location.hasPermission();
+      if (permissionGranted != location.PermissionStatus.granted) {
+        permissionGranted = await _location.requestPermission();
+        if (permissionGranted != location.PermissionStatus.granted) {
+          return;
+        }
+      }
+
+      LocationData locationData = await _location.getLocation();
+      currentLocation = locationData;
+      print(
+          'Location - Latitude: ${currentLocation!.latitude}, Longitude: ${currentLocation!.longitude}');
+
+      final coordinates = LatLng(
+        currentLocation!.latitude!,
+        currentLocation!.longitude!,
+      );
+      final addresses = await placemarkFromCoordinates(
+          coordinates.latitude, coordinates.longitude);
+      if (addresses.isNotEmpty) {
+        final address = addresses.first;
+        locationName = address.street;
+        print('Location Name: $locationName');
+      }
+    } catch (e) {
+      print("Error getting location: $e");
+      return;
     }
   }
 }
@@ -26,6 +75,7 @@ class WelcomePage extends StatelessWidget {
   final String welcomeMessage;
 
   WelcomePage({required this.welcomeMessage});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,46 +146,8 @@ class _LoginPageTestState extends State<LoginPageTest> {
             ),
             SizedBox(height: 20.0),
             ElevatedButton(
-              onPressed: () async {
-                final username = usernameController.text;
-                final password = passwordController.text;
-                final role = await authService.login(username, password);
-                if (role != null) {
-                  String welcomeMessage = '';
-                  if (role == UserRole.admin) {
-                    welcomeMessage = username;
-                  } else if (role == UserRole.user) {
-                    welcomeMessage = username;
-                  }
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomePage(
-                        welcomeMessage: welcomeMessage,
-                      ),
-                    ),
-                  );
-                } else {
-                  // Show error message
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text('Login Failed'),
-                        content: Text('Invalid username or password.'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text('OK'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
+              onPressed: () {
+                _loginAndFetchLocation();
               },
               child: Text('Login'),
             ),
@@ -143,6 +155,47 @@ class _LoginPageTestState extends State<LoginPageTest> {
         ),
       ),
     );
+  }
+
+  Future<void> _loginAndFetchLocation() async {
+    final username = usernameController.text;
+    final password = passwordController.text;
+    final role = await authService.login(username, password);
+    if (role != null) {
+      String welcomeMessage = '';
+      if (role == UserRole.admin || role == UserRole.user) {
+        welcomeMessage = username;
+      }
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(
+            welcomeMessage: welcomeMessage,
+          ),
+        ),
+      );
+
+      await authService.fetchLocation();
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Login Failed'),
+            content: Text('Invalid username or password.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 }
 

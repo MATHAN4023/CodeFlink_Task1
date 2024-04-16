@@ -1,5 +1,6 @@
-import 'package:codeflink/Pages/LocDemo.dart';
 import 'package:codeflink/Pages/AcceptedJobCardsPage.dart';
+import 'package:codeflink/Pages/Attendence.dart';
+import 'package:codeflink/Pages/LocDemo.dart';
 import 'package:codeflink/Pages/LoginPageTest.dart';
 import 'package:codeflink/Pages/PendingJobCard.dart';
 import 'package:codeflink/Pages/Profile.dart';
@@ -8,7 +9,6 @@ import 'package:flutter/material.dart';
 
 import 'CamaraAccess.dart';
 import 'Inbox.dart';
-import 'LoginPage.dart';
 import 'Trackingorder.dart';
 
 class HomePage extends StatelessWidget {
@@ -55,6 +55,16 @@ class HomePage extends StatelessWidget {
               leading: Icon(Icons.add_chart_rounded),
               onTap: () => Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => Trackingorder()),
+              ),
+            ),
+            Divider(
+              height: 10,
+            ),
+            ListTile(
+              title: Text("Attendence"),
+              leading: Icon(Icons.add_chart_rounded),
+              onTap: () => Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => Attendence()),
               ),
             ),
             Divider(
