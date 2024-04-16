@@ -26,7 +26,6 @@ class WelcomePage extends StatelessWidget {
   final String welcomeMessage;
 
   WelcomePage({required this.welcomeMessage});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,10 +40,16 @@ class WelcomePage extends StatelessWidget {
   }
 }
 
-class LoginPageTest extends StatelessWidget {
+class LoginPageTest extends StatefulWidget {
+  @override
+  _LoginPageTestState createState() => _LoginPageTestState();
+}
+
+class _LoginPageTestState extends State<LoginPageTest> {
   final AuthService authService = AuthService();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  bool showPassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -70,23 +75,25 @@ class LoginPageTest extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
             ),
-            // TextField(
-            //   controller: usernameController,
-            //   decoration: InputDecoration(labelText: 'Username'),
-            // ),
             SizedBox(height: 20.0),
             TextFormField(
               controller: passwordController,
+              obscureText: !showPassword,
               decoration: InputDecoration(
                 labelText: 'Password',
                 border: OutlineInputBorder(),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    showPassword ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      showPassword = !showPassword;
+                    });
+                  },
+                ),
               ),
             ),
-            // TextField(
-            //   controller: passwordController,
-            //   decoration: InputDecoration(labelText: 'Password'),
-            //   obscureText: true,
-            // ),
             SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () async {
@@ -100,15 +107,6 @@ class LoginPageTest extends StatelessWidget {
                   } else if (role == UserRole.user) {
                     welcomeMessage = username;
                   }
-
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => WelcomePage(
-                  //       welcomeMessage: welcomeMessage,
-                  //     ),
-                  //   ),
-                  // );
 
                   Navigator.push(
                     context,
