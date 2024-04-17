@@ -27,6 +27,12 @@ class _PendingJobCardState extends State<PendingJobCard> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Pending Job Cards'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset('lib/Assets/Icon/LOGO.png'), // Replace 'your_image.png' with your image path
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: orderStatus.length,
