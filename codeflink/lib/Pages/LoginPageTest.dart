@@ -12,6 +12,7 @@ enum UserRole {
   admin,
   user,
   guest,
+  printer,
 }
 
 class AuthService {
@@ -19,11 +20,17 @@ class AuthService {
   LocationData? currentLocation;
   static String? locationName; // Declare locationName as a static variable
 
-  Future<UserRole?> login(String username, String password) async {
+  Future<UserRole?> login(
+      String username, String password, String MachineId) async {
     if (username == "admin" && password == "admin") {
       return UserRole.admin;
     } else if (username == "user" && password == "user") {
       return UserRole.user;
+    } else if (username == "printer" &&
+        password == "printer" &&
+        MachineId == 123) {
+      print("object");
+      return UserRole.printer;
     } else {
       return null;
     }
@@ -99,7 +106,9 @@ class _LoginPageTestState extends State<LoginPageTest> {
   final AuthService authService = AuthService();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController MachineIdController = TextEditingController();
   bool showPassword = false;
+  bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -145,6 +154,42 @@ class _LoginPageTestState extends State<LoginPageTest> {
               ),
             ),
             SizedBox(height: 20.0),
+            if (isChecked)
+              TextFormField(
+                controller: MachineIdController,
+                // obscureText: !showPassword,
+                decoration: InputDecoration(
+                  labelText: 'Machine ID',
+                  border: OutlineInputBorder(),
+                  // suffixIcon: IconButton(
+                  //   icon: Icon(
+                  //     showPassword ? Icons.visibility : Icons.visibility_off,
+                  //   ),
+                  //   onPressed: () {
+                  //     setState(() {
+                  //       showPassword = !showPassword;
+                  //     });
+                  //   },
+                  // ),
+                ),
+              ),
+            SizedBox(height: 20.0),
+            CheckboxListTile(
+              title: Text(
+                "Printing Phase Employee",
+                style: TextStyle(color: Colors.blue),
+              ),
+              value: isChecked,
+              onChanged: (value) {
+                setState(() {
+                  isChecked = value!;
+                  if (!isChecked) {
+                    // Clear the password controller when checkbox is unchecked
+                    MachineIdController;
+                  }
+                });
+              },
+            ),
             ElevatedButton(
               onPressed: () {
                 _loginAndFetchLocation();
@@ -160,7 +205,8 @@ class _LoginPageTestState extends State<LoginPageTest> {
   Future<void> _loginAndFetchLocation() async {
     final username = usernameController.text;
     final password = passwordController.text;
-    final role = await authService.login(username, password);
+    final MachineId = MachineIdController.text;
+    final role = await authService.login(username, password, MachineId);
     if (role != null) {
       String welcomeMessage = '';
       if (role == UserRole.admin || role == UserRole.user) {
