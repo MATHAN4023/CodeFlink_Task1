@@ -1,5 +1,6 @@
 import 'package:codeflink/Pages/AcceptedJobCardsPage.dart';
 import 'package:codeflink/Pages/Attendence.dart';
+import 'package:codeflink/Pages/Beforedata.dart';
 import 'package:codeflink/Pages/LocDemo.dart';
 import 'package:codeflink/Pages/LoginPageTest.dart';
 import 'package:codeflink/Pages/PendingJobCard.dart';
@@ -7,7 +8,6 @@ import 'package:codeflink/Pages/Profile.dart';
 import 'package:codeflink/Pages/UserProfile.dart';
 import 'package:flutter/material.dart';
 
-import 'CamaraAccess.dart';
 import 'Inbox.dart';
 import 'Trackingorder.dart';
 
@@ -119,7 +119,7 @@ class HomePage extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
                       Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => CamAccess()),
+                        MaterialPageRoute(builder: (context) => BeforeData()),
                       );
                     },
                     child: Container(

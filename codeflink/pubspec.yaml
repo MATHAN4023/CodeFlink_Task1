@@ -22,7 +22,6 @@ dependencies:
   flutter_map: ^6.1.0
   latlong2: ^0.9.1
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -48,6 +47,3 @@ flutter:
     - lib/Assets/3d/pending.png
     - lib/Assets/Profile/nithi.jpg
     - lib/Assets/Profile/mathan.png
-
-
-
