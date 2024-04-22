@@ -42,7 +42,11 @@ class MyHomePage extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset('lib/Assets/Icon/LOGO.png'), // Replace 'your_image.png' with your image path
+            child: Image.asset(
+              'lib/Assets/Icon/LOGO.png', // Replace 'your_image.png' with your image path
+              height: 100, // Adjust the height as needed
+              width: 100, // Adjust the width as needed
+            ),
           ),
         ],
       ),
