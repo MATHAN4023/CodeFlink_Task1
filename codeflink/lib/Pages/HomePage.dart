@@ -1,11 +1,9 @@
-import 'package:codeflink/Pages/AcceptedJobCardsPage.dart';
 import 'package:codeflink/Pages/Attendence.dart';
 import 'package:codeflink/Pages/Beforedata.dart';
+import 'package:codeflink/Pages/EmplyeeDetails.dart';
 import 'package:codeflink/Pages/LocDemo.dart';
 import 'package:codeflink/Pages/LoginPageTest.dart';
 import 'package:codeflink/Pages/PendingJobCard.dart';
-import 'package:codeflink/Pages/Profile.dart';
-import 'package:codeflink/Pages/UserProfile.dart';
 import 'package:flutter/material.dart';
 
 import 'Inbox.dart';
@@ -356,151 +354,91 @@ class HomePage extends StatelessWidget {
               ],
             ),
             SizedBox(height: 40),
-            
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                            builder: (context) => EmplyeeDetails()),
+                      );
+                    },
+                    child: Container(
+                      width: 320,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25.0),
+                        gradient: const LinearGradient(
+                          begin: Alignment(-0.5, -1.0),
+                          end: Alignment(0.5, 1.0),
+                          colors: [
+                            Color.fromRGBO(194, 27, 206, 1.0),
+                            Color.fromRGBO(187, 65, 196, 1.0)
+                          ],
+                          stops: [0.1357, 0.9838],
+                          transform:
+                              GradientRotation(209.21 * 3.14159265 / 180),
+                        ),
+                      ),
+                      child: Stack(
+                        children: [
+                          // Positioned.fill(
+                          //   child: Align(
+                          //     alignment: Alignment.topCenter,
+                          //     child: Image.asset(
+                          //       'lib/Assets/3d/pending.png',
+                          //       width: 130,
+                          //       height: 130,
+                          //     ),
+                          //   ),
+                          // ),
+                          const Positioned.fill(
+                            child: Align(
+                              // alignment: Alignment(0, 0.3),
+                              child: Text(
+                                'Employee Dashboard',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25.0,
+                                ),
+                              ),
+                            ),
+                          ),
+                          // Positioned(
+                          //   bottom: 10,
+                          //   left: 135,
+                          //   child: Container(
+                          //     width: 40,
+                          //     height: 40,
+                          //     decoration: BoxDecoration(
+                          //       shape: BoxShape.circle,
+                          //       color: Colors.grey[300],
+                          //     ),
+                          //     child: Icon(
+                          //       Icons.star,
+                          //       color: Colors.blueGrey,
+                          //       size: 30,
+                          //     ),
+                          //   ),
+                          // ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 40),
             //  if(userRole == 'admin'){
             //   Text("Hello world")
             // }
-            Visibility(
-              visible: userRole ==
-                  'admin', // Replace 'condition' with your actual condition
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 20),
-                    child: Text(
-                      'EXISTING EMPLOYEE',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 30),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => Profile()),
-                        );
-                      },
-                      child: Icon(Icons.add),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Visibility(
-              visible: userRole == 'admin',
-              child: Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      // Navigate to other page
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => UserProfile()),
-                      );
-                    },
-                    child: Card(
-                      elevation: 5,
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundImage:
-                                  AssetImage("lib/Assets/Profile/nithi.jpg"),
-                            ),
-                            SizedBox(width: 20),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Nitheshwaran",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  "Printer",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Spacer(),
-                            IconButton(
-                              icon: Icon(Icons.edit),
-                              onPressed: () {
-                                // Implement edit functionality
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      // Navigate to other page
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => UserProfile()),
-                      );
-                    },
-                    child: Card(
-                      elevation: 5,
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundImage:
-                                  AssetImage("lib/Assets/Profile/mathan.png"),
-                            ),
-                            SizedBox(width: 20),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Mathan",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  "Designer",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Spacer(),
-                            IconButton(
-                              icon: Icon(Icons.edit),
-                              onPressed: () {},
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
 
             // GestureDetector(
             //   onTap: () {
