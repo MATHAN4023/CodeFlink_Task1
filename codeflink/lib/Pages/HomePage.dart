@@ -25,6 +25,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('${welcomeMessage}'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset('lib/Assets/Icon/LOGO.png'), // Replace 'your_image.png' with your image path
+          ),
+        ],
       ),
       drawer: Drawer(
         backgroundColor: Colors.white,
@@ -62,7 +68,7 @@ class HomePage extends StatelessWidget {
             ),
             ListTile(
               title: Text("Attendence"),
-              leading: Icon(Icons.add_chart_rounded),
+              leading: Icon(Icons.person_2_outlined),
               onTap: () => Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => Attendence()),
               ),
@@ -75,26 +81,6 @@ class HomePage extends StatelessWidget {
               leading: Icon(Icons.location_on_outlined),
               onTap: () => Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => LocDemo()),
-              ),
-            ),
-            Divider(
-              height: 10,
-            ),
-            ListTile(
-              title: Text("Login Demo"),
-              leading: Icon(Icons.location_on_outlined),
-              onTap: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => LoginPageTest()),
-              ),
-            ),
-            Divider(
-              height: 10,
-            ),
-            ListTile(
-              title: Text("cards"),
-              leading: Icon(Icons.location_on_outlined),
-              onTap: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => AcceptedJobCardsPage()),
               ),
             ),
             Divider(
@@ -211,7 +197,8 @@ class HomePage extends StatelessWidget {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) =>
-                              Inbox(welcomeMessage: welcomeMessage),
+                              // Inbox(welcomeMessage: welcomeMessage),
+                              Inbox(),
                         ),
                       );
                     },

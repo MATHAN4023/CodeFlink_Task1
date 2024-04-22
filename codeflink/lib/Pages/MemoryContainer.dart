@@ -34,6 +34,7 @@ class _MemoryContainer1State extends State<MemoryContainer1> {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Captured memories'),
+          
           backgroundColor: Colors.purpleAccent,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),

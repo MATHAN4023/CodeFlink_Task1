@@ -39,6 +39,12 @@ class MyHomePage extends StatelessWidget {
         automaticallyImplyLeading:true,
         leading: IconButton(icon:Icon(Icons.arrow_back), onPressed:()=>Navigator.pop(context)),
         title: Text('Accecpted Job cards'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset('lib/Assets/Icon/LOGO.png'), // Replace 'your_image.png' with your image path
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(

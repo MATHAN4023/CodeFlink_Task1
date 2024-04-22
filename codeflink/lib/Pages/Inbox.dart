@@ -103,8 +103,8 @@ class MemoryContainer extends StatelessWidget {
 }
 
 class Inbox extends StatefulWidget {
-  final String welcomeMessage;
-  Inbox({required this.welcomeMessage});
+  // final String welcomeMessage;
+  // Inbox({required this.welcomeMessage});
 
   // const Inbox({Key? key}) : super(key: key);
 
@@ -163,6 +163,12 @@ class _InboxState extends State<Inbox> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Existing Job Card"),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset('lib/Assets/Icon/LOGO.png'), // Replace 'your_image.png' with your image path
+          ),
+        ],
         //------- backgroundColor: Colors.redAccent,
         // leading: IconButton(
         //   icon: Icon(Icons.arrow_back),
@@ -246,6 +252,6 @@ class _InboxState extends State<Inbox> {
 
 void main() {
   runApp(MaterialApp(
-    home: Inbox(welcomeMessage: ''),
+    home: Inbox(),
   ));
 }

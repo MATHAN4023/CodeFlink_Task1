@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:codeflink/Pages/Inbox.dart';
+import 'package:codeflink/Pages/PendingJobCard.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -106,6 +108,12 @@ class _EnterDetailsState extends State<EnterDetails> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Enter Details'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset('lib/Assets/Icon/LOGO.png'), // Replace 'your_image.png' with your image path
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20.0),
@@ -153,7 +161,7 @@ class _EnterDetailsState extends State<EnterDetails> {
               controller: PoolController,
               onChanged: (_) => _updateButtonState(),
               decoration: InputDecoration(
-                labelText: 'Pool',
+                labelText: 'Pole',
                 border: OutlineInputBorder(),
               ),
             ),
@@ -201,7 +209,11 @@ class _EnterDetailsState extends State<EnterDetails> {
   }
 
   void _submit() {
-    // Implement your submit logic here
-    print('Submit Button Pressed');
+    // print('Submit Button Pressed');
+    // Navigate to another page
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Inbox()),
+    );
   }
 }
