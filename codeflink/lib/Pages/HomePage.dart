@@ -38,8 +38,9 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.white,
         child: Column(
           children: <Widget>[
-            const UserAccountsDrawerHeader(
-              accountName: Text('Username'),
+            UserAccountsDrawerHeader(
+              // accountName: Text('Username'),
+              accountName: Text(welcomeMessage),
               accountEmail: Text("Username@gmail.com"),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage("lib/Assets/3d/pending.png"),
@@ -88,6 +89,19 @@ class HomePage extends StatelessWidget {
             Divider(
               height: 10,
             ),
+            if (userRole == 'admin')
+              ListTile(
+                title: Text("Employee Rights"),
+                leading: Icon(Icons.stay_current_portrait_outlined),
+                onTap: () => Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => LocDemo()),
+                ),
+              ),
+            if (userRole == 'admin')
+              Divider(
+                height: 10,
+              ),
+
             Expanded(child: SizedBox()), // Expanded to occupy remaining space
             ListTile(
               title: Text("LOGOUT"),
@@ -354,194 +368,89 @@ class HomePage extends StatelessWidget {
               ],
             ),
             SizedBox(height: 40),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Card(
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                            builder: (context) => EmplyeeDetails()),
-                      );
-                    },
-                    child: Container(
-                      width: 320,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25.0),
-                        gradient: const LinearGradient(
-                          begin: Alignment(-0.5, -1.0),
-                          end: Alignment(0.5, 1.0),
-                          colors: [
-                            Color.fromRGBO(194, 27, 206, 1.0),
-                            Color.fromRGBO(187, 65, 196, 1.0)
-                          ],
-                          stops: [0.1357, 0.9838],
-                          transform:
-                              GradientRotation(209.21 * 3.14159265 / 180),
+            if (userRole == 'admin')
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                              builder: (context) => EmplyeeDetails()),
+                        );
+                      },
+                      child: Container(
+                        width: 320,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25.0),
+                          gradient: const LinearGradient(
+                            begin: Alignment(-0.5, -1.0),
+                            end: Alignment(0.5, 1.0),
+                            colors: [
+                              Color.fromRGBO(194, 27, 206, 1.0),
+                              Color.fromRGBO(187, 65, 196, 1.0)
+                            ],
+                            stops: [0.1357, 0.9838],
+                            transform:
+                                GradientRotation(209.21 * 3.14159265 / 180),
+                          ),
                         ),
-                      ),
-                      child: Stack(
-                        children: [
-                          // Positioned.fill(
-                          //   child: Align(
-                          //     alignment: Alignment.topCenter,
-                          //     child: Image.asset(
-                          //       'lib/Assets/3d/pending.png',
-                          //       width: 130,
-                          //       height: 130,
-                          //     ),
-                          //   ),
-                          // ),
-                          const Positioned.fill(
-                            child: Align(
-                              // alignment: Alignment(0, 0.3),
-                              child: Text(
-                                'Employee Dashboard',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 25.0,
+                        child: Stack(
+                          children: [
+                            // Positioned.fill(
+                            //   child: Align(
+                            //     alignment: Alignment.topCenter,
+                            //     child: Image.asset(
+                            //       'lib/Assets/3d/pending.png',
+                            //       width: 130,
+                            //       height: 130,
+                            //     ),
+                            //   ),
+                            // ),
+                            const Positioned.fill(
+                              child: Align(
+                                // alignment: Alignment(0, 0.3),
+                                child: Text(
+                                  'Employee Dashboard',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25.0,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          // Positioned(
-                          //   bottom: 10,
-                          //   left: 135,
-                          //   child: Container(
-                          //     width: 40,
-                          //     height: 40,
-                          //     decoration: BoxDecoration(
-                          //       shape: BoxShape.circle,
-                          //       color: Colors.grey[300],
-                          //     ),
-                          //     child: Icon(
-                          //       Icons.star,
-                          //       color: Colors.blueGrey,
-                          //       size: 30,
-                          //     ),
-                          //   ),
-                          // ),
-                        ],
+                            // Positioned(
+                            //   bottom: 10,
+                            //   left: 135,
+                            //   child: Container(
+                            //     width: 40,
+                            //     height: 40,
+                            //     decoration: BoxDecoration(
+                            //       shape: BoxShape.circle,
+                            //       color: Colors.grey[300],
+                            //     ),
+                            //     child: Icon(
+                            //       Icons.star,
+                            //       color: Colors.blueGrey,
+                            //       size: 30,
+                            //     ),
+                            //   ),
+                            // ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
             SizedBox(height: 40),
-            //  if(userRole == 'admin'){
-            //   Text("Hello world")
-            // }
-
-            // GestureDetector(
-            //   onTap: () {
-            //     // Navigate to other page
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(builder: (context) => UserProfile()),
-            //     );
-            //   },
-            //   child: Card(
-            //     elevation: 5,
-            //     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            //     child: Padding(
-            //       padding: EdgeInsets.all(10),
-            //       child: Row(
-            //         children: [
-            //           CircleAvatar(
-            //             radius: 30,
-            //             backgroundImage:
-            //                 AssetImage("lib/Assets/Profile/nithi.jpg"),
-            //           ),
-            //           SizedBox(width: 20),
-            //           Column(
-            //             crossAxisAlignment: CrossAxisAlignment.start,
-            //             children: [
-            //               Text(
-            //                 "Nitheshwaran",
-            //                 style: TextStyle(
-            //                   fontSize: 18,
-            //                   fontWeight: FontWeight.bold,
-            //                 ),
-            //               ),
-            //               Text(
-            //                 "Printer",
-            //                 style: TextStyle(
-            //                   fontSize: 16,
-            //                   color: Colors.grey,
-            //                 ),
-            //               ),
-            //             ],
-            //           ),
-            //           Spacer(),
-            //           IconButton(
-            //             icon: Icon(Icons.edit),
-            //             onPressed: () {
-            //               // Implement edit functionality
-            //             },
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            // GestureDetector(
-            //   onTap: () {
-            //     // Navigate to other page
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(builder: (context) => UserProfile()),
-            //     );
-            //   },
-            //   child: Card(
-            //     elevation: 5,
-            //     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            //     child: Padding(
-            //       padding: EdgeInsets.all(10),
-            //       child: Row(
-            //         children: [
-            //           CircleAvatar(
-            //             radius: 30,
-            //             backgroundImage:
-            //                 AssetImage("lib/Assets/Profile/mathan.png"),
-            //           ),
-            //           SizedBox(width: 20),
-            //           Column(
-            //             crossAxisAlignment: CrossAxisAlignment.start,
-            //             children: [
-            //               Text(
-            //                 "Mathan",
-            //                 style: TextStyle(
-            //                   fontSize: 18,
-            //                   fontWeight: FontWeight.bold,
-            //                 ),
-            //               ),
-            //               Text(
-            //                 "Designer",
-            //                 style: TextStyle(
-            //                   fontSize: 16,
-            //                   color: Colors.grey,
-            //                 ),
-            //               ),
-            //             ],
-            //           ),
-            //           Spacer(),
-            //           IconButton(
-            //             icon: Icon(Icons.edit),
-            //             onPressed: () {},
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),

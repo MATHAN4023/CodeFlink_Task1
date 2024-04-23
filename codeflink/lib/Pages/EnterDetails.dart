@@ -103,21 +103,18 @@ class _EnterDetailsState extends State<EnterDetails> {
     }
   }
 
+  bool wantLogo = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Enter Details'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              'lib/Assets/Icon/LOGO.png', // Replace 'your_image.png' with your image path
-              height: 100, // Adjust the height as needed
-              width: 100, // Adjust the width as needed
-            ),
-          ),
-        ],
+        title: wantLogo
+            ? Image.asset(
+                'lib/Assets/Icon/LOGO.png',
+                height: 150,
+                width: 150,
+              )
+            : Text('Enter Details'),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20.0),

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:codeflink/Pages/CamaraAccess.dart';
 import 'package:flutter/material.dart';
@@ -100,73 +101,93 @@ class _BeforeDataState extends State<BeforeData> {
     }
   }
 
+  bool wantLogo = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Enter Details'),
+        // title: Text( wantLogo ? 'logo' : 'Enter Details'),
+        centerTitle: true,
+        title: wantLogo
+            ? Image.asset(
+                'lib/Assets/Icon/LOGO.png',
+                height: 150,
+                width: 150,
+              )
+            : Text('Enter Details'),
       ),
       body: Center(
         // Wrap the Column with Center widget
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                'Today Date: ${DateFormat('dd/MM/yyyy').format(selectedDate)}',
-                style: TextStyle(fontSize: 16.0),
+        child: Column(
+          children: [
+            Text(
+              'Enter Details',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(height: 10.0),
-              Text(
-                'Live Location: $liveLocation', // Display liveLocation
-                style: TextStyle(fontSize: 16.0),
+            ),
+            SizedBox(height: 10.0),
+            SingleChildScrollView(
+              padding: EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    'Today Date: ${DateFormat('dd/MM/yyyy').format(selectedDate)}',
+                    style: TextStyle(fontSize: 16.0),
+                  ),
+                  SizedBox(height: 10.0),
+                  Text(
+                    'Live Location: $liveLocation', // Display liveLocation
+                    style: TextStyle(fontSize: 16.0),
+                  ),
+                  SizedBox(height: 20.0),
+                  TextFormField(
+                    controller: clientNameController,
+                    onChanged: (_) => _updateButtonState(),
+                    decoration: InputDecoration(
+                      labelText: 'Client Name',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  TextFormField(
+                    controller: siteNameController,
+                    onChanged: (_) => _updateButtonState(),
+                    decoration: InputDecoration(
+                      labelText: 'Site Name',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  TextFormField(
+                    controller: phoneNumberController,
+                    onChanged: (_) => _updateButtonState(),
+                    keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(
+                      labelText: 'Phone Number',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  TextFormField(
+                    controller: emailController,
+                    onChanged: (_) => _updateButtonState(),
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 20.0),
+                  ElevatedButton(
+                    onPressed: _allFieldsFilled ? _submit : null,
+                    child: Text('Submit'),
+                  ),
+                ],
               ),
-              SizedBox(height: 20.0),
-              TextFormField(
-                controller: clientNameController,
-                onChanged: (_) => _updateButtonState(),
-                decoration: InputDecoration(
-                  labelText: 'Client Name',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 10.0),
-              TextFormField(
-                controller: siteNameController,
-                onChanged: (_) => _updateButtonState(),
-                decoration: InputDecoration(
-                  labelText: 'Site Name',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 10.0),
-              TextFormField(
-                controller: phoneNumberController,
-                onChanged: (_) => _updateButtonState(),
-                keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                  labelText: 'Phone Number',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 10.0),
-              TextFormField(
-                controller: emailController,
-                onChanged: (_) => _updateButtonState(),
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: _allFieldsFilled ? _submit : null,
-                child: Text('Submit'),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
