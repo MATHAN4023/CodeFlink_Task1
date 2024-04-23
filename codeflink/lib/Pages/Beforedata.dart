@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ffi';
 
 import 'package:codeflink/Pages/CamaraAccess.dart';
+import 'package:codeflink/Pages/config.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -101,7 +102,7 @@ class _BeforeDataState extends State<BeforeData> {
     }
   }
 
-  bool wantLogo = true;
+  // bool wantLogo = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

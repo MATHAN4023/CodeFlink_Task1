@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:codeflink/Pages/Inbox.dart';
 import 'package:codeflink/Pages/PendingJobCard.dart';
+import 'package:codeflink/Pages/config.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -103,7 +104,7 @@ class _EnterDetailsState extends State<EnterDetails> {
     }
   }
 
-  bool wantLogo = true;
+  // bool wantLogo = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

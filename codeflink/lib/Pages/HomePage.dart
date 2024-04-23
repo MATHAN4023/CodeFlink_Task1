@@ -47,6 +47,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
             ListTile(
+              // title: Text("Home Page"),
               title: Text("Home Page"),
               leading: Icon(Icons.home_filled),
               onTap: () => Navigator.of(context).pushReplacement(
