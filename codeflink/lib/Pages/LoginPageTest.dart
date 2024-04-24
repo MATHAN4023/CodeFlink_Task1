@@ -214,14 +214,21 @@ class _LoginPageTestState extends State<LoginPageTest> {
           role == UserRole.printer) {
         welcomeMessage = username;
       }
-      Navigator.push(
-        context,
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => HomePage(
             welcomeMessage: welcomeMessage,
           ),
         ),
       );
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => HomePage(
+      //       welcomeMessage: welcomeMessage,
+      //     ),
+      //   ),
+      // );
 
       await authService.fetchLocation();
     } else {

@@ -51,10 +51,10 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
-        ),
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back),
+        //   onPressed: () => Navigator.pop(context),
+        // ),
         title: Text('Accepted Job Cards'),
         actions: [
           Padding(

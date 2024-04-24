@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:codeflink/Pages/Trackingorder.dart';
+import 'package:codeflink/Pages/config.dart';
 import 'package:flutter/material.dart';
 
 class MemoryContainer1 extends StatefulWidget {
@@ -33,9 +34,14 @@ class _MemoryContainer1State extends State<MemoryContainer1> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Captured memories'),
-          
-          backgroundColor: Colors.purpleAccent,
+          title: wantLogo
+              ? Image.asset(
+                  'lib/Assets/Icon/LOGO.png',
+                  height: 150,
+                  width: 150,
+                )
+              : Text('Enter Details'),
+          backgroundColor: Colors.white,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
@@ -57,6 +63,14 @@ class _MemoryContainer1State extends State<MemoryContainer1> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Center(
+                child: Text(
+                  'Captured Memories',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
               SizedBox(height: kToolbarHeight),
               CarouselSlider(
                 carouselController: _carouselController,

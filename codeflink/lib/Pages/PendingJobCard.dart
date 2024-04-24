@@ -48,13 +48,41 @@ class _PendingJobCardState extends State<PendingJobCard> {
                 case "Accepted Cards":
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AcceptedJobCardsPage()),
+                    MaterialPageRoute(
+                      builder: (context) => AcceptedJobCardsPage(),
+                    ),
                   );
                   break;
                 case "Designing Cards":
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DesigningJobCardsPage()),
+                    MaterialPageRoute(
+                      builder: (context) => DesigningJobCardsPage(),
+                    ),
+                  );
+                  break;
+                case "Customer Acceptance":
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DesigningJobCardsPage(),
+                    ),
+                  );
+                  break;
+                case "Printing Cards":
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DesigningJobCardsPage(),
+                    ),
+                  );
+                  break;
+                case "Delivered":
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DesigningJobCardsPage(),
+                    ),
                   );
                   break;
                 // Add cases for other statuses if needed
@@ -64,7 +92,8 @@ class _PendingJobCardState extends State<PendingJobCard> {
               }
             },
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: AnimatedContainer(
                 duration: Duration(milliseconds: 500),
                 curve: Curves.easeInOut,
@@ -105,7 +134,9 @@ class _PendingJobCardState extends State<PendingJobCard> {
                           ),
                         ),
                         Text(
-                          index == orderStatus.length - 1 ? "Delivered" : "5 days",
+                          index == orderStatus.length - 1
+                              ? "Delivered"
+                              : "5 days",
                           style: TextStyle(
                             fontSize: 16.0,
                             color: Colors.green,

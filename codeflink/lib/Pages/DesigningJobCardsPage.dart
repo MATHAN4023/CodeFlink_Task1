@@ -10,7 +10,7 @@ class DesigningJobCardsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Designing Job cards',
+      title: 'Designing Phase',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -19,10 +19,14 @@ class DesigningJobCardsPage extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  // Sample JSON data
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   final List<String> jsonData = [
-   '{"title": "Arangam Artisans", "subtitle": "Gandhipuram", "content": "11:29PM"}',
+    '{"title": "Arangam Artisans", "subtitle": "Gandhipuram", "content": "11:29PM"}',
     '{"title": "Thamarai Textiles", "subtitle": "Gandhipuram", "content": "12:22PM"}',
     '{"title": "Vannam Variety Store", "subtitle": "thudiyalur", "content": "1:00PM"}',
     '{"title": "Kaaviyam Creations", "subtitle": "Gandhipuram", "content": "3:23PM"}',
@@ -32,27 +36,62 @@ class MyHomePage extends StatelessWidget {
     '{"title": "Kuyil Couturers", "subtitle": "Gandhipuram", "content": "11:29AM"}',
   ];
 
+  List<String> filteredData = [];
+
+  TextEditingController searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    filteredData = jsonData;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading:true,
-        leading: IconButton(icon:Icon(Icons.arrow_back), onPressed:()=>Navigator.pop(context)),
-        title: Text('Designing Job cards'),
+        automaticallyImplyLeading: true,
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back),
+        //   onPressed: () => Navigator.pop(context),
+        // ),
+        title: Text('Designing Phase'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Image.asset(
-              'lib/Assets/Icon/LOGO.png', // Replace 'your_image.png' with your image path
-              height: 100, // Adjust the height as needed
-              width: 100, // Adjust the width as needed
+              'lib/Assets/Icon/LOGO.png',
+              height: 100,
+              width: 100,
             ),
           ),
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: _buildCards(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              TextField(
+                controller: searchController,
+                onChanged: (value) {
+                  filterData(value);
+                },
+                decoration: InputDecoration(
+                  labelText: 'Search Jobs',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Column(
+                children: _buildCards(),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -61,19 +100,19 @@ class MyHomePage extends StatelessWidget {
   List<Widget> _buildCards() {
     List<Widget> cards = [];
 
-    for (int i = 0; i < jsonData.length; i += 2) {
-      if (i + 1 < jsonData.length) {
+    for (int i = 0; i < filteredData.length; i += 2) {
+      if (i + 1 < filteredData.length) {
         cards.add(Row(
           children: [
-            _buildCard(jsonData[i]),
-            _buildCard(jsonData[i + 1]),
+            _buildCard(filteredData[i]),
+            _buildCard(filteredData[i + 1]),
           ],
         ));
       } else {
         cards.add(Row(
           children: [
-            _buildCard(jsonData[i]),
-            SizedBox(width: 180), // Placeholder for the last row if there's only one card
+            _buildCard(filteredData[i]),
+            SizedBox(width: 180),
           ],
         ));
       }
@@ -106,5 +145,14 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void filterData(String query) {
+    setState(() {
+      filteredData = jsonData
+          .where((element) =>
+              element.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    });
   }
 }

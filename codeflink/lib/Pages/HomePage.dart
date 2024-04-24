@@ -50,6 +50,14 @@ class HomePage extends StatelessWidget {
               // title: Text("Home Page"),
               title: Text("Home Page"),
               leading: Icon(Icons.home_filled),
+              // onTap: () => Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => HomePage(
+              //       welcomeMessage: welcomeMessage,
+              //     ),
+              //   ),
+              // ),
               onTap: () => Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
                     builder: (context) => HomePage(
@@ -63,9 +71,15 @@ class HomePage extends StatelessWidget {
             ListTile(
               title: Text("Tracking Order"),
               leading: Icon(Icons.add_chart_rounded),
-              onTap: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => Trackingorder()),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Trackingorder(),
+                ),
               ),
+              // onTap: () => Navigator.of(context).pushReplacement(
+              //   MaterialPageRoute(builder: (context) => Trackingorder()),
+              // ),
             ),
             Divider(
               height: 10,
@@ -73,9 +87,15 @@ class HomePage extends StatelessWidget {
             ListTile(
               title: Text("Attendence"),
               leading: Icon(Icons.person_2_outlined),
-              onTap: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => Attendence()),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Attendence(),
+                ),
               ),
+              // onTap: () => Navigator.of(context).pushReplacement(
+              //   MaterialPageRoute(builder: (context) => Attendence()),
+              // ),
             ),
             Divider(
               height: 10,
@@ -83,9 +103,15 @@ class HomePage extends StatelessWidget {
             ListTile(
               title: Text("Current Location"),
               leading: Icon(Icons.location_on_outlined),
-              onTap: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => LocDemo()),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LocDemo(),
+                ),
               ),
+              // onTap: () => Navigator.of(context).pushReplacement(
+              //   MaterialPageRoute(builder: (context) => LocDemo()),
+              // ),
             ),
             Divider(
               height: 10,
@@ -94,8 +120,11 @@ class HomePage extends StatelessWidget {
               ListTile(
                 title: Text("Employee Rights"),
                 leading: Icon(Icons.stay_current_portrait_outlined),
-                onTap: () => Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => LocDemo()),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EmplyeeDetails(),
+                  ),
                 ),
               ),
             if (userRole == 'admin')
@@ -131,8 +160,11 @@ class HomePage extends StatelessWidget {
                   ),
                   child: InkWell(
                     onTap: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => BeforeData()),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BeforeData(),
+                        ),
                       );
                     },
                     child: Container(
@@ -202,24 +234,14 @@ class HomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(25.0),
                   ),
                   child: InkWell(
-                    // onTap: () {
-                    //   Navigator.of(context).pushReplacement(
-                    //     MaterialPageRoute(
-                    //         builder: (context) => Inbox(
-                    //             welcomeMessag: "welcomeMessage",
-                    //             )),
-                    //   );
-                    // },
                     onTap: () {
-                      Navigator.of(context).pushReplacement(
+                      Navigator.push(
+                        context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              // Inbox(welcomeMessage: welcomeMessage),
-                              Inbox(),
+                          builder: (context) => Inbox(),
                         ),
                       );
                     },
-
                     child: Container(
                       width: 150,
                       height: 200,
@@ -297,9 +319,11 @@ class HomePage extends StatelessWidget {
                   ),
                   child: InkWell(
                     onTap: () {
-                      Navigator.of(context).pushReplacement(
+                      Navigator.push(
+                        context,
                         MaterialPageRoute(
-                            builder: (context) => PendingJobCard()),
+                          builder: (context) => PendingJobCard(),
+                        ),
                       );
                     },
                     child: Container(
@@ -380,9 +404,15 @@ class HomePage extends StatelessWidget {
                     ),
                     child: InkWell(
                       onTap: () {
-                        Navigator.of(context).pushReplacement(
+                        // Navigator.of(context).pushReplacement(
+                        //   MaterialPageRoute(
+                        //       builder: (context) => EmplyeeDetails()),
+                        // );
+                        Navigator.push(
+                          context,
                           MaterialPageRoute(
-                              builder: (context) => EmplyeeDetails()),
+                            builder: (context) => EmplyeeDetails(),
+                          ),
                         );
                       },
                       child: Container(
