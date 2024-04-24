@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:ffi';
 
-import 'package:codeflink/Pages/CamaraAccess.dart';
+import 'package:codeflink/Pages/GroundLevel/CamaraAccess.dart';
 import 'package:codeflink/Pages/config.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';

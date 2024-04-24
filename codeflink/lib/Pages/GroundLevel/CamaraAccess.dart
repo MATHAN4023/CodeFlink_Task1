@@ -2,11 +2,11 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
-import 'package:codeflink/Pages/EnterDetails.dart';
-import 'package:codeflink/Pages/HomePage.dart';
+import 'package:codeflink/Pages/GroundLevel/EnterDetails.dart';
+import 'package:codeflink/Pages/CommonForAll/HomePage.dart';
 import 'package:flutter/material.dart';
 
-import 'FullScreenImageGallery.dart';
+import '../FullScreenImageGallery.dart';
 
 class CamAccess extends StatefulWidget {
   const CamAccess({Key? key}) : super(key: key);

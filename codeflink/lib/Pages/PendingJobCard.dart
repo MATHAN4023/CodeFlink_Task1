@@ -1,5 +1,5 @@
-import 'package:codeflink/Pages/AcceptedJobCardsPage.dart';
-import 'package:codeflink/Pages/DesigningJobCardsPage.dart';
+import 'package:codeflink/Pages/AdminLevel/AcceptedJobCardsPage.dart';
+import 'package:codeflink/Pages/AdminLevel/DesigningJobCardsPage.dart';
 import 'package:flutter/material.dart';
 
 void main() {

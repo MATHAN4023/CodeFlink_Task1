@@ -1,4 +1,4 @@
-import 'package:codeflink/Pages/Profile.dart';
+import 'package:codeflink/Pages/CommonForAll/Profile.dart';
 import 'package:codeflink/Pages/UserProfile.dart';
 import 'package:flutter/material.dart';
 
