@@ -1,7 +1,7 @@
 import 'package:codeflink/Pages/AttendanceMaintanance/Attendence.dart';
-import 'package:codeflink/Pages/GroundLevel/Beforedata.dart';
+import 'package:codeflink/Pages/CommonForAll/EmployeeCredential.dart';
 import 'package:codeflink/Pages/EmplyeeDetails.dart';
-import 'package:codeflink/Pages/LocDemo.dart';
+import 'package:codeflink/Pages/GroundLevel/Beforedata.dart';
 import 'package:codeflink/Pages/LoginPageTest.dart';
 import 'package:codeflink/Pages/PendingJobCard.dart';
 import 'package:flutter/material.dart';
@@ -75,6 +75,22 @@ class HomePage extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => Trackingorder(),
+                ),
+              ),
+              // onTap: () => Navigator.of(context).pushReplacement(
+              //   MaterialPageRoute(builder: (context) => Trackingorder()),
+              // ),
+            ),
+            Divider(
+              height: 10,
+            ),
+            ListTile(
+              title: Text("Employee Credential"),
+              leading: Icon(Icons.lock_person_outlined),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EmployeeCredential(),
                 ),
               ),
               // onTap: () => Navigator.of(context).pushReplacement(
