@@ -2,6 +2,7 @@ import 'package:codeflink/Pages/AttendanceMaintanance/Attendence.dart';
 import 'package:codeflink/Pages/CommonForAll/EmployeeCredential.dart';
 import 'package:codeflink/Pages/EmplyeeDetails.dart';
 import 'package:codeflink/Pages/GroundLevel/Beforedata.dart';
+import 'package:codeflink/Pages/GroundLevel/Instalation/InstallProcessingCard.dart';
 import 'package:codeflink/Pages/LoginPageTest.dart';
 import 'package:codeflink/Pages/PendingJobCard.dart';
 import 'package:flutter/material.dart';
@@ -377,6 +378,91 @@ class HomePage extends StatelessWidget {
                                 alignment: Alignment(0, 0.3),
                                 child: Text(
                                   'Pending Job card',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 10,
+                              left: 135,
+                              child: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.grey[300],
+                                ),
+                                child: Icon(
+                                  Icons.star,
+                                  color: Colors.blueGrey,
+                                  size: 30,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            SizedBox(height: 20),
+            if (userRole == 'user')
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => InstallProcessingCard(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 320,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25.0),
+                          gradient: const LinearGradient(
+                            begin: Alignment(-0.5, -1.0),
+                            end: Alignment(0.5, 1.0),
+                            colors: [
+                              Color.fromRGBO(157, 178, 255, 1),
+                              Color.fromRGBO(13, 48, 163, 1)
+                            ],
+                            stops: [0.1357, 0.9838],
+                            transform:
+                                GradientRotation(209.21 * 3.14159265 / 180),
+                          ),
+                        ),
+                        child: Stack(
+                          children: [
+                            Positioned.fill(
+                              child: Align(
+                                alignment: Alignment.topCenter,
+                                child: Image.asset(
+                                  'lib/Assets/3d/pending.png',
+                                  width: 130,
+                                  height: 130,
+                                ),
+                              ),
+                            ),
+                            const Positioned.fill(
+                              child: Align(
+                                alignment: Alignment(0, 0.3),
+                                child: Text(
+                                  'Installation',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
