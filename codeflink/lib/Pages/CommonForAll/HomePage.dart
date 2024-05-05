@@ -4,6 +4,7 @@ import 'package:codeflink/Pages/EmplyeeDetails.dart';
 import 'package:codeflink/Pages/GroundLevel/Beforedata.dart';
 import 'package:codeflink/Pages/GroundLevel/Instalation/InstallProcessingCard.dart';
 import 'package:codeflink/Pages/GroundLevel/MesurementsEnterDetials.dart';
+import 'package:codeflink/Pages/GroundLevel/SelectOutlet.dart';
 import 'package:codeflink/Pages/LoginPageTest.dart';
 import 'package:codeflink/Pages/PendingJobCard.dart';
 import 'package:flutter/material.dart';
@@ -600,7 +601,7 @@ class HomePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => MesurementsEnterDetials(),
+                            builder: (context) => SelectOutlet(),
                           ),
                         );
                       },

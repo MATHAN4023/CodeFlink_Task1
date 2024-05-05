@@ -104,8 +104,8 @@ class MemoryContainer extends StatelessWidget {
 }
 
 class Inbox extends StatefulWidget {
-  // final String welcomeMessage;
-  // Inbox({required this.welcomeMessage});
+  // final String userRole;
+  // Inbox({required this.userRole});
 
   // const Inbox({Key? key}) : super(key: key);
 
@@ -158,6 +158,7 @@ class _InboxState extends State<Inbox> {
     super.initState();
     filteredMemories = memories;
   }
+
 
   @override
   Widget build(BuildContext context) {
