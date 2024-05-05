@@ -3,6 +3,7 @@ import 'package:codeflink/Pages/CommonForAll/EmployeeCredential.dart';
 import 'package:codeflink/Pages/EmplyeeDetails.dart';
 import 'package:codeflink/Pages/GroundLevel/Beforedata.dart';
 import 'package:codeflink/Pages/GroundLevel/Instalation/InstallProcessingCard.dart';
+import 'package:codeflink/Pages/GroundLevel/MesurementsEnterDetials.dart';
 import 'package:codeflink/Pages/LoginPageTest.dart';
 import 'package:codeflink/Pages/PendingJobCard.dart';
 import 'package:flutter/material.dart';
@@ -16,14 +17,28 @@ class HomePage extends StatelessWidget {
   // const str = welcomeMessage;
 
   // const HomePage({Key? key}) : super(key: key);
+  String checkUserRole(String input) {
+    if (input.contains("design")) {
+      return "Designer";
+    } else if (input.contains("admin")) {
+      return "Admin";
+    } else if (input.contains("printer")) {
+      return "Printer";
+    } else if (input.contains("user")) {
+      return "User";
+    } else {
+      return "guest";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    String userRole = welcomeMessage;
+    // String userRole = welcomeMessage;
+    String userRole = checkUserRole(welcomeMessage);
     print(userRole);
     return Scaffold(
       appBar: AppBar(
-        title: Text('${welcomeMessage}'),
+        // title: Text('${welcomeMessage}'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -41,8 +56,8 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             UserAccountsDrawerHeader(
               // accountName: Text('Username'),
-              accountName: Text(welcomeMessage),
-              accountEmail: Text("Username@gmail.com"),
+              accountName: Text(userRole),
+              accountEmail: Text(welcomeMessage),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage("lib/Assets/3d/pending.png"),
               ),
@@ -101,7 +116,7 @@ class HomePage extends StatelessWidget {
             Divider(
               height: 10,
             ),
-            if (userRole != 'admin')
+            if (userRole != 'Admin')
               ListTile(
                 title: Text("Attendence"),
                 leading: Icon(Icons.person_2_outlined),
@@ -115,7 +130,7 @@ class HomePage extends StatelessWidget {
                 //   MaterialPageRoute(builder: (context) => Attendence()),
                 // ),
               ),
-            if (userRole != 'admin')
+            if (userRole != 'Admin')
               Divider(
                 height: 10,
               ),
@@ -132,7 +147,7 @@ class HomePage extends StatelessWidget {
             // Divider(
             //   height: 10,
             // ),
-            if (userRole == 'admin')
+            if (userRole == 'Admin')
               ListTile(
                 title: Text("Employee Rights"),
                 leading: Icon(Icons.stay_current_portrait_outlined),
@@ -143,7 +158,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-            if (userRole == 'admin')
+            if (userRole == 'Admin')
               Divider(
                 height: 10,
               ),
@@ -166,7 +181,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            if (userRole == 'admin' || userRole == 'user')
+            if (userRole == 'Admin' || userRole == 'User')
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -326,7 +341,167 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             SizedBox(height: 20),
-            if (userRole == 'admin')
+            if (userRole == 'Designer')
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Inbox(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 150,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25.0),
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color.fromRGBO(72, 100, 246, 1.0),
+                              Color.fromRGBO(173, 2, 254, 1.0),
+                            ],
+                          ),
+                        ),
+                        child: Stack(
+                          children: [
+                            Positioned.fill(
+                              child: Align(
+                                alignment: Alignment.topCenter,
+                                child: Image.asset(
+                                  'lib/Assets/3d/newjob.png',
+                                  width: 130,
+                                  height: 130,
+                                ),
+                              ),
+                            ),
+                            Positioned.fill(
+                              child: Align(
+                                alignment: Alignment(0, 0.3),
+                                child: Text(
+                                  'Existing Job',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 10,
+                              right: 55,
+                              child: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.grey[300],
+                                ),
+                                child: Icon(
+                                  Icons.star,
+                                  color: Colors.blueGrey,
+                                  size: 30,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => InstallProcessingCard(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 150,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25.0),
+                          gradient: const LinearGradient(
+                            begin: Alignment(-0.5, -1.0),
+                            end: Alignment(0.5, 1.0),
+                            colors: [
+                              Color.fromRGBO(253, 173, 0, 1.0),
+                              Color.fromRGBO(233, 109, 44, 1.0),
+                            ],
+                            stops: [0.1357, 0.9838],
+                            transform:
+                                GradientRotation(209.21 * 3.14159265 / 180),
+                          ),
+                        ),
+                        child: Stack(
+                          children: [
+                            Positioned.fill(
+                              child: Align(
+                                alignment: Alignment.topCenter,
+                                child: Image.asset(
+                                  'lib/Assets/3d/existing.png',
+                                  width: 130,
+                                  height: 130,
+                                ),
+                              ),
+                            ),
+                            Positioned.fill(
+                              child: Align(
+                                alignment: Alignment(0, 0.3),
+                                child: Text(
+                                  'Pending Job',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 10,
+                              right: 55,
+                              child: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.grey[300],
+                                ),
+                                child: Icon(
+                                  Icons.star,
+                                  color: Colors.blueGrey,
+                                  size: 30,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            SizedBox(height: 20),
+            if (userRole == 'Admin')
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -410,8 +585,93 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
+            // SizedBox(height: 20),
+            if (userRole == 'User')
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MesurementsEnterDetials(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 320,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25.0),
+                          gradient: const LinearGradient(
+                            begin: Alignment(-0.5, -1.0),
+                            end: Alignment(0.5, 1.0),
+                            colors: [
+                              Color.fromRGBO(255, 183, 157, 1),
+                              Color.fromRGBO(163, 71, 13, 1)
+                            ],
+                            stops: [0.1357, 0.9838],
+                            transform:
+                                GradientRotation(209.21 * 3.14159265 / 180),
+                          ),
+                        ),
+                        child: Stack(
+                          children: [
+                            Positioned.fill(
+                              child: Align(
+                                alignment: Alignment.topCenter,
+                                child: Image.asset(
+                                  'lib/Assets/3d/pending.png',
+                                  width: 130,
+                                  height: 130,
+                                ),
+                              ),
+                            ),
+                            const Positioned.fill(
+                              child: Align(
+                                alignment: Alignment(0, 0.3),
+                                child: Text(
+                                  'Mesurements',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 10,
+                              left: 135,
+                              child: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.grey[300],
+                                ),
+                                child: Icon(
+                                  Icons.star,
+                                  color: Colors.blueGrey,
+                                  size: 30,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             SizedBox(height: 20),
-            if (userRole == 'user')
+            if (userRole == 'User')
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -496,7 +756,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             SizedBox(height: 20),
-            if (userRole == 'printer')
+            if (userRole == 'Printer')
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -580,8 +840,8 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-            SizedBox(height: 40),
-            if (userRole == 'admin')
+            SizedBox(height: 20),
+            if (userRole == 'Admin')
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -665,7 +925,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-            SizedBox(height: 40),
+            SizedBox(height: 20),
           ],
         ),
       ),

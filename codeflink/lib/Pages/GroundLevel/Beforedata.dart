@@ -1,12 +1,15 @@
 import 'dart:async';
 import 'dart:ffi';
 
+import 'package:codeflink/Pages/AttendanceMaintanance/Attendence.dart';
 import 'package:codeflink/Pages/GroundLevel/CamaraAccess.dart';
+import 'package:codeflink/Pages/Inbox.dart';
 import 'package:codeflink/Pages/config.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -27,7 +30,7 @@ class _BeforeDataState extends State<BeforeData> {
   TextEditingController clientNameController = TextEditingController();
   TextEditingController siteNameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+  // TextEditingController emailController = TextEditingController();
 
   late Timer _timer;
 
@@ -147,7 +150,7 @@ class _BeforeDataState extends State<BeforeData> {
                     controller: clientNameController,
                     onChanged: (_) => _updateButtonState(),
                     decoration: InputDecoration(
-                      labelText: 'Client Name',
+                      labelText: 'Site Name',
                       border: OutlineInputBorder(),
                     ),
                   ),
@@ -156,7 +159,7 @@ class _BeforeDataState extends State<BeforeData> {
                     controller: siteNameController,
                     onChanged: (_) => _updateButtonState(),
                     decoration: InputDecoration(
-                      labelText: 'Site Name',
+                      labelText: 'Sales Person Name',
                       border: OutlineInputBorder(),
                     ),
                   ),
@@ -171,16 +174,16 @@ class _BeforeDataState extends State<BeforeData> {
                     ),
                   ),
                   SizedBox(height: 10.0),
-                  TextFormField(
-                    controller: emailController,
-                    onChanged: (_) => _updateButtonState(),
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      labelText: 'Email',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(height: 20.0),
+                  // TextFormField(
+                  //   controller: emailController,
+                  //   onChanged: (_) => _updateButtonState(),
+                  //   keyboardType: TextInputType.emailAddress,
+                  //   decoration: InputDecoration(
+                  //     labelText: 'Email',
+                  //     border: OutlineInputBorder(),
+                  //   ),
+                  // ),
+                  // SizedBox(height: 20.0),
                   ElevatedButton(
                     onPressed: _allFieldsFilled ? _submit : null,
                     child: Text('Submit'),
@@ -201,15 +204,26 @@ class _BeforeDataState extends State<BeforeData> {
   bool get _allFieldsFilled {
     return siteNameController.text.isNotEmpty &&
         phoneNumberController.text.isNotEmpty &&
-        emailController.text.isNotEmpty &&
+        // emailController.text.isNotEmpty &&
         clientNameController.text.isNotEmpty;
   }
 
   void _submit() {
     // Implement your submit logic here
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => CamAccess()),
+
+    Fluttertoast.showToast(
+      msg: "Successful Registerd",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: const Color.fromARGB(255, 116, 207, 119),
+      textColor: Colors.white,
+      fontSize: 16.0,
     );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => HomePage()),
+    // );
+    Navigator.pop(context);
   }
 }

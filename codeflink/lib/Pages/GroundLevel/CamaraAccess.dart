@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:codeflink/Pages/GroundLevel/EnterDetails.dart';
 import 'package:codeflink/Pages/CommonForAll/HomePage.dart';
+import 'package:codeflink/Pages/Inbox.dart';
 import 'package:flutter/material.dart';
 
 import '../FullScreenImageGallery.dart';
@@ -195,7 +196,7 @@ class _CamAccessState extends State<CamAccess> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => EnterDetails(),
+                  builder: (context) => Inbox(),
                 ),
               );
               setState(() {

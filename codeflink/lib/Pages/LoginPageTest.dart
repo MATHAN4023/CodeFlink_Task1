@@ -13,6 +13,7 @@ enum UserRole {
   user,
   guest,
   printer,
+  designer
 }
 
 class AuthService {
@@ -22,11 +23,13 @@ class AuthService {
 
   Future<UserRole?> login(
       String username, String password, String machineId) async {
-    if (username == "admin" && password == "admin") {
+    if (username == "admin@gmail.com" && password == "admin") {
       return UserRole.admin;
-    } else if (username == "user" && password == "user") {
+    } else if (username == "user@gmail.com" && password == "user") {
       return UserRole.user;
-    } else if (username == "printer" &&
+    }else if (username == "designer@gmail.com" && password == "designer") {
+      return UserRole.designer;
+    } else if (username == "printer@gmail.com" &&
         password == "printer" &&
         machineId == "123") {
       // print("object");
@@ -211,6 +214,7 @@ class _LoginPageTestState extends State<LoginPageTest> {
       String welcomeMessage = '';
       if (role == UserRole.admin ||
           role == UserRole.user ||
+          role == UserRole.designer ||
           role == UserRole.printer) {
         welcomeMessage = username;
       }

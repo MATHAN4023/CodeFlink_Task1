@@ -156,13 +156,23 @@ class _InstallProcessingCardState extends State<InstallProcessingCard> {
     return Scaffold(
       appBar: AppBar(
         // title: Text("Existing Job Card"),
-        title: wantLogo
-            ? Image.asset(
-                'lib/Assets/Icon/LOGO.png',
-                height: 150,
-                width: 150,
-              )
-            : Text('Enter Details'),
+        // title: wantLogo
+        //     ? Image.asset(
+        //         'lib/Assets/Icon/LOGO.png',
+        //         height: 150,
+        //         width: 150,
+        //       )
+        //     : Text('Enter Details'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              'lib/Assets/Icon/LOGO.png', // Replace 'your_image.png' with your image path
+              height: 100, // Adjust the height as needed
+              width: 100, // Adjust the width as needed
+            ),
+          ),
+        ],
         // actions: [
         //   Padding(
         //     padding: const EdgeInsets.all(8.0),
@@ -203,77 +213,82 @@ class _InstallProcessingCardState extends State<InstallProcessingCard> {
     );
   }
 
-Widget _buildMemoriesList() {
-  return ListView.builder(
-    itemCount: filteredMemories.length,
-    itemBuilder: (context, index) {
-      Memory memory = filteredMemories[index];
-      return InkWell(
-        onTap: () {
-          // Handle onTap event
-        },
-        child: Card(
-          elevation: 3,
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          color: Colors.white, // Background color of the card
-          child: Padding(
-            padding: EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Icon(
-                      memory.iconData,
-                      color: Colors.blue, // Color of the icon
-                    ),
-                    SizedBox(width: 10),
-                    Text(
-                      memory.event,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue, // Color of the event text
+  Widget _buildMemoriesList() {
+    return ListView.builder(
+      itemCount: filteredMemories.length,
+      itemBuilder: (context, index) {
+        Memory memory = filteredMemories[index];
+        return InkWell(
+          onTap: () {
+            // Handle onTap event
+          },
+          child: Card(
+            elevation: 3,
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            color: Colors.white, // Background color of the card
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        memory.iconData,
+                        color: Colors.blue, // Color of the icon
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10),
-                Text(
-                  memory.username,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green, // Color of the username text
+                      SizedBox(width: 10),
+                      Text(
+                        memory.event,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue, // Color of the event text
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                SizedBox(height: 5),
-                Text(
-                  memory.text,
-                  style: TextStyle(fontSize: 16, color: Colors.black87), // Color of the text
-                ),
-                SizedBox(height: 5),
-                Text(
-                  memory.time.toString(),
-                  style: TextStyle(fontSize: 14, color: Colors.grey), // Color of the time text
-                ),
-                SizedBox(height: 5),
-                Text(
-                  memory.location,
-                  style: TextStyle(fontSize: 14, color: Colors.grey), // Color of the location text
-                ),
-              ],
+                  SizedBox(height: 10),
+                  Text(
+                    memory.username,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green, // Color of the username text
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    memory.text,
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black87), // Color of the text
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    memory.time.toString(),
+                    style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey), // Color of the time text
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    memory.location,
+                    style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey), // Color of the location text
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      );
-    },
-  );
-}
-
+        );
+      },
+    );
+  }
 
   void filterMemories(String query) {
     setState(() {
