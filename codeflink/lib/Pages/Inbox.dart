@@ -1,29 +1,9 @@
-import 'package:codeflink/Pages/CommonForAll/HomePage.dart';
-import 'package:codeflink/Pages/MemoryContainer.dart';
-import 'package:codeflink/Pages/config.dart';
 import 'package:flutter/material.dart';
 
-class Memory {
-  final String event;
-  final String username;
-  final String text;
-  final String time;
-  final IconData iconData;
-  final String location; // New field for location
-
-  Memory({
-    required this.event,
-    required this.username,
-    required this.text,
-    required this.time,
-    required this.iconData,
-    required this.location,
-  });
-}
+import 'MemoryContainer.dart';
+import 'memory_data.dart';
 
 class MemoryContainer extends StatelessWidget {
-  // final String welcomeMessage;
-
   final String event;
   final String username;
   final String text;
@@ -40,7 +20,6 @@ class MemoryContainer extends StatelessWidget {
     required this.iconData,
     required this.location,
     required this.onTap,
-    // required this.welcomeMessage
   });
 
   @override
@@ -104,53 +83,12 @@ class MemoryContainer extends StatelessWidget {
 }
 
 class Inbox extends StatefulWidget {
-  // final String userRole;
-  // Inbox({required this.userRole});
-
-  // const Inbox({Key? key}) : super(key: key);
-
   @override
   State<Inbox> createState() => _InboxState();
 }
 
 class _InboxState extends State<Inbox> {
-  List<Memory> memories = [
-    Memory(
-      event: 'Meenakshi Temple',
-      username: 'Mathan',
-      text: 'One Of the Best Temple.',
-      time: '10:30 AM',
-      iconData: Icons.temple_hindu_outlined,
-      location: 'Madurai',
-    ),
-    Memory(
-      event: 'Vishald mall 1',
-      username: 'Nithesh',
-      text: 'One OF the Best Mall in Madurai.',
-      time: '12:00 PM',
-      iconData: Icons.location_city_sharp,
-      location: 'Madurai',
-    ),
-    Memory(
-      event: 'Vishald mall 2',
-      username: 'Ritcherd',
-      text: 'One OF the Best Mall in Madurai.',
-      time: '12:00 PM',
-      iconData: Icons.location_city_sharp,
-      location: 'Madurai',
-    ),
-    Memory(
-      event: 'Vishald mall 3',
-      username: 'Rammm',
-      text: 'One OF the Best Mall in Madurai.',
-      time: '12:00 PM',
-      iconData: Icons.location_city_sharp,
-      location: 'Madurai',
-    ),
-    // Add more Memory objects as needed
-  ];
-
-  List<Memory> filteredMemories = [];
+  late List<Memory> filteredMemories;
   TextEditingController searchController = TextEditingController();
 
   @override
@@ -159,29 +97,11 @@ class _InboxState extends State<Inbox> {
     filteredMemories = memories;
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // title: Text("Existing Job Card"),
-        title: wantLogo
-            ? Image.asset(
-                'lib/Assets/Icon/LOGO.png',
-                height: 150,
-                width: 150,
-              )
-            : Text('Enter Details'),
-        // actions: [
-        //   Padding(
-        //     padding: const EdgeInsets.all(8.0),
-        //     child: Image.asset(
-        //       'lib/Assets/Icon/LOGO.png', // Replace 'your_image.png' with your image path
-        //       height: 100, // Adjust the height as needed
-        //       width: 100, // Adjust the width as needed
-        //     ),
-        //   ),
-        // ],
+        title: Text('Inbox'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -195,7 +115,7 @@ class _InboxState extends State<Inbox> {
                 filterMemories(value);
               },
               decoration: InputDecoration(
-                labelText: 'Search Jobs',
+                labelText: 'Search Memories',
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
@@ -224,8 +144,6 @@ class _InboxState extends State<Inbox> {
           time: memory.time,
           iconData: memory.iconData,
           location: memory.location,
-          // welcomeMessage: "memory",
-
           onTap: () {
             Navigator.push(
               context,
